@@ -159,51 +159,8 @@ let typecond = function(ref){
 for(let j=0; j<21; j++){
 myarr[j].onclick= function (){typecond(myarr[j])}
 }
-//players divs function
-let cond=function(reference,shownresult){
-   let numb = Number(window.prompt("Enter number of cards"));
-   let type = reference.textContent
-   let x = shownresult
-      if (type =="L" || type=="l"){
-         x.innerHTML= numb* -15
-      }
-      else if(type=="T" || type=="t"){
-         x.innerHTML=250 - numb* 50
-      }
-      else if(type=="B" || type=="b"){
-         x.innerHTML= numb* -25
-      }
-      else if(type=="D" || type=="d"){
-         x.innerHTML= numb* -10
-      }
-      else if(type=="R" || type=="r"){
-         x.innerHTML= numb* -75      
-      }
-}
-for(let i=0; i<4; i++){
-   arr1[i].onclick = function (){cond(z1,arr1[i])}
-   arr2[i].onclick = function (){cond(z2,arr2[i])}
-   arr3[i].onclick = function (){cond(z3,arr3[i])}
-   arr4[i].onclick = function (){cond(z4,arr4[i])}
-   arr5[i].onclick = function (){cond(z5,arr5[i])}
-   arr6[i].onclick = function (){cond(z6,arr6[i])}
-   arr7[i].onclick = function (){cond(z7,arr7[i])}
-   arr8[i].onclick = function (){cond(z8,arr8[i])}
-   arr9[i].onclick = function (){cond(z9,arr9[i])}
-   arr10[i].onclick = function (){cond(z10,arr10[i])}
-   arr11[i].onclick = function (){cond(z11,arr11[i])}
-   arr12[i].onclick = function (){cond(z12,arr12[i])}
-   arr13[i].onclick = function (){cond(z13,arr13[i])}
-   arr14[i].onclick = function (){cond(z14,arr14[i])}
-   arr15[i].onclick = function (){cond(z15,arr15[i])}
-   arr16[i].onclick = function (){cond(z16,arr16[i])}
-   arr17[i].onclick = function (){cond(z17,arr17[i])}
-   arr18[i].onclick = function (){cond(z18,arr18[i])}
-   arr19[i].onclick = function (){cond(z19,arr19[i])}
-   arr20[i].onclick = function (){cond(z20,arr20[i])}
-}
 //displaying results in result row
-document.getElementById("refreshbutton").onclick=function(){
+let refreshresult=function(){
    document.getElementById("col62").innerHTML=
       Number(a1.textContent)+Number(b1.textContent)+Number(c1.textContent)+
       Number(d1.textContent)+Number(e1.textContent)+Number(f1.textContent)+
@@ -236,4 +193,47 @@ document.getElementById("refreshbutton").onclick=function(){
       Number(m4.textContent)+Number(n4.textContent)+Number(o4.textContent)+
       Number(p4.textContent)+Number(q4.textContent)+Number(r4.textContent)+
       Number(s4.textContent)+Number(t4.textContent)
+}
+//players divs function
+let cond=function(reference,shownresult){
+   let numb = Number(window.prompt("Enter number of cards"));
+   let type = reference.textContent
+   let x = shownresult
+      if (type =="L" || type=="l"){
+         x.innerHTML= numb* -15
+      }
+      else if(type=="T" || type=="t"){
+         x.innerHTML=250 - numb* 50
+      }
+      else if(type=="B" || type=="b"){
+         x.innerHTML= numb* -25
+      }
+      else if(type=="D" || type=="d"){
+         x.innerHTML= numb* -10
+      }
+      else if(type=="R" || type=="r"){
+         x.innerHTML= numb* -75      
+      }
+}
+for(let i=0; i<4; i++){
+   arr1[i].onclick = function (){cond(z1,arr1[i]);refreshresult()}
+   arr2[i].onclick = function (){cond(z2,arr2[i]);refreshresult()}
+   arr3[i].onclick = function (){cond(z3,arr3[i]);refreshresult()}
+   arr4[i].onclick = function (){cond(z4,arr4[i]);refreshresult()}
+   arr5[i].onclick = function (){cond(z5,arr5[i]);refreshresult()}
+   arr6[i].onclick = function (){cond(z6,arr6[i]);refreshresult()}
+   arr7[i].onclick = function (){cond(z7,arr7[i]);refreshresult()}
+   arr8[i].onclick = function (){cond(z8,arr8[i]);refreshresult()}
+   arr9[i].onclick = function (){cond(z9,arr9[i]);refreshresult()}
+   arr10[i].onclick = function (){cond(z10,arr10[i]);refreshresult()}
+   arr11[i].onclick = function (){cond(z11,arr11[i]);refreshresult()}
+   arr12[i].onclick = function (){cond(z12,arr12[i]);refreshresult()}
+   arr13[i].onclick = function (){cond(z13,arr13[i]);refreshresult()}
+   arr14[i].onclick = function (){cond(z14,arr14[i]);refreshresult()}
+   arr15[i].onclick = function (){cond(z15,arr15[i]);refreshresult()}
+   arr16[i].onclick = function (){cond(z16,arr16[i]);refreshresult()}
+   arr17[i].onclick = function (){cond(z17,arr17[i]);refreshresult()}
+   arr18[i].onclick = function (){cond(z18,arr18[i]);refreshresult()}
+   arr19[i].onclick = function (){cond(z19,arr19[i]);refreshresult()}
+   arr20[i].onclick = function (){cond(z20,arr20[i]);refreshresult()}
 }

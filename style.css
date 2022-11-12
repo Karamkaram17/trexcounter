@@ -92,10 +92,8 @@
     text-align: center;
     color: burlywood;
 }
-#submitbutton{
+#col61{
     background-color: black;
     color: white;
-    border-radius: 15px;
-    width: 130px;
-    height: 25px;
+    padding-top: 5px;
 }
