@@ -103,6 +103,11 @@ let q4 = document.getElementById("col526") ;
 let r4 = document.getElementById("col536") ;
 let s4 = document.getElementById("col546") ;
 let t4 = document.getElementById("col556") ;
+//result row variables
+let u1 = document.getElementById("col62") ;
+let u2 = document.getElementById("col63") ;
+let u3 = document.getElementById("col64") ;
+let u4 = document.getElementById("col65") ;
 //player name row variables
 let v1 = document.getElementById("col13") ;
 let v2 = document.getElementById("col14") ;
@@ -113,92 +118,54 @@ let w1 = document.getElementById("col211") ;
 let w2 = document.getElementById("col311") ;
 let w3 = document.getElementById("col411") ;
 let w4 = document.getElementById("col511") ;
-//result row variables
-let u1 = document.getElementById("col556") ;
-let u2 = document.getElementById("col556") ;
-let u3 = document.getElementById("col556") ;
-let u4 = document.getElementById("col556") ;
 //row arrays
-let arr1=[a1,a2,a3,a4]
-let arr2=[b1,b2,b3,b4]
-let arr3=[c1,c2,c3,c4]
-let arr4=[d1,d2,d3,d4]
-let arr5=[e1,e2,e3,e4]
-let arr6=[f1,f2,f3,f4]
-let arr7=[g1,g2,g3,g4]
-let arr8=[h1,h2,h3,h4]
-let arr9=[i1,i2,i3,i4]
-let arr10=[j1,j2,j3,j4]
-let arr11=[k1,k2,k3,k4]
-let arr12=[l1,l2,l3,l4]
-let arr13=[m1,m2,m3,m4]
-let arr14=[n1,n2,n3,n4]
-let arr15=[o1,o2,o3,o4]
-let arr16=[p1,p2,p3,p4]
-let arr17=[q1,q2,q3,q4]
-let arr18=[r1,r2,r3,r4]
-let arr19=[s1,s2,s3,s4]
-let arr20=[t1,t2,t3,t4]
-let myarr=[z1,z2,z3,z4,z5,z6,z7,z8,z8,z9,z10,z11,z12,z13,z14,z15,z16,z17,z18,z19,z20]
+let arr=[
+   [z1,a1,a2,a3,a4],
+   [z2,b1,b2,b3,b4],
+   [z3,c1,c2,c3,c4],
+   [z4,d1,d2,d3,d4],
+   [z5,e1,e2,e3,e4],
+   [z6,f1,f2,f3,f4],
+   [z7,g1,g2,g3,g4],
+   [z8,h1,h2,h3,h4],
+   [z9,i1,i2,i3,i4],
+   [z10,j1,j2,j3,j4],
+   [z11,k1,k2,k3,k4],
+   [z12,l1,l2,l3,l4],
+   [z13,m1,m2,m3,m4],
+   [z14,n1,n2,n3,n4],
+   [z15,o1,o2,o3,o4],
+   [z16,p1,p2,p3,p4],
+   [z17,q1,q2,q3,q4],
+   [z18,r1,r2,r3,r4],
+   [z19,s1,s2,s3,s4],
+   [z20,t1,t2,t3,t4],
+   [u1,u2,u3,u4]
+];
 //displaying players names
 document.getElementById("submitbutton").onclick = function(){
    let player1 = document.getElementById("player1").value ;
-      v1.innerHTML=w1.innerHTML=player1 
+      v1.innerHTML=w1.innerHTML=player1 ;
    let player2 = document.getElementById("player2").value ;
-      v2.innerHTML=w2.innerHTML=player2
+      v2.innerHTML=w2.innerHTML=player2;
    let pc3 = document.getElementById("player3").value ;
-      v3.innerHTML=w3.innerHTML=pc3
+      v3.innerHTML=w3.innerHTML=pc3 ;
    let pc4 = document.getElementById("player4").value ;
-      v4.innerHTML=w4.innerHTML=pc4
+      v4.innerHTML=w4.innerHTML=pc4 ;
 }
 //displaying the type for each row 
 let typecond = function(ref){
-   let x = window.prompt(`T: Trex \nL: Ltouch\nB: Banet\nD: Dinere\nR: Khoury koubba`)
-   ref.innerHTML = x
+   let x = window.prompt(`T: Trex \nL: Ltouch\nB: Banet\nD: Dinere\nR: Khoury koubba`) ;
+   ref.innerHTML = x ;
 }
-for(let j=0; j<21; j++){
-myarr[j].onclick= function (){typecond(myarr[j])}
+for(let j=0; j<20; j++){
+arr[j][0].onclick= function (){typecond(arr[j][0])} ;
 }
-//displaying results in result row
-let refreshresult=function(){
-   document.getElementById("col62").innerHTML=
-      Number(a1.textContent)+Number(b1.textContent)+Number(c1.textContent)+
-      Number(d1.textContent)+Number(e1.textContent)+Number(f1.textContent)+
-      Number(g1.textContent)+Number(h1.textContent)+Number(i1.textContent)+
-      Number(j1.textContent)+Number(k1.textContent)+Number(l1.textContent)+
-      Number(m1.textContent)+Number(n1.textContent)+Number(o1.textContent)+
-      Number(p1.textContent)+Number(q1.textContent)+Number(r1.textContent)+
-      Number(s1.textContent)+Number(t1.textContent)
-   document.getElementById("col63").innerHTML=
-      Number(a2.textContent)+Number(b2.textContent)+Number(c2.textContent)+
-      Number(d2.textContent)+Number(e2.textContent)+Number(f2.textContent)+
-      Number(g2.textContent)+Number(h2.textContent)+Number(i2.textContent)+
-      Number(j2.textContent)+Number(k2.textContent)+Number(l2.textContent)+
-      Number(m2.textContent)+Number(n2.textContent)+Number(o2.textContent)+
-      Number(p2.textContent)+Number(q2.textContent)+Number(r2.textContent)+
-      Number(s2.textContent)+Number(t2.textContent)
-   document.getElementById("col64").innerHTML=
-      Number(a3.textContent)+Number(b3.textContent)+Number(c3.textContent)+
-      Number(d3.textContent)+Number(e3.textContent)+Number(f3.textContent)+
-      Number(g3.textContent)+Number(h3.textContent)+Number(i3.textContent)+
-      Number(j3.textContent)+Number(k3.textContent)+Number(l3.textContent)+
-      Number(m3.textContent)+Number(n3.textContent)+Number(o3.textContent)+
-      Number(p3.textContent)+Number(q3.textContent)+Number(r3.textContent)+
-      Number(s3.textContent)+Number(t3.textContent)
-   document.getElementById("col65").innerHTML=
-      Number(a4.textContent)+Number(b4.textContent)+Number(c4.textContent)+
-      Number(d4.textContent)+Number(e4.textContent)+Number(f4.textContent)+
-      Number(g4.textContent)+Number(h4.textContent)+Number(i4.textContent)+
-      Number(j4.textContent)+Number(k4.textContent)+Number(l4.textContent)+
-      Number(m4.textContent)+Number(n4.textContent)+Number(o4.textContent)+
-      Number(p4.textContent)+Number(q4.textContent)+Number(r4.textContent)+
-      Number(s4.textContent)+Number(t4.textContent)
-}
-//players divs function
+//displaying the result for each div 
 let cond=function(reference,shownresult){
    let numb = Number(window.prompt("Enter number of cards"));
-   let type = reference.textContent
-   let x = shownresult
+   let type = reference.textContent ;
+   let x = shownresult ;
       if (type =="L" || type=="l"){
          x.innerHTML= numb* -15
       }
@@ -215,25 +182,21 @@ let cond=function(reference,shownresult){
          x.innerHTML= numb* -75      
       }
 }
-for(let i=0; i<4; i++){
-   arr1[i].onclick = function (){cond(z1,arr1[i]);refreshresult()}
-   arr2[i].onclick = function (){cond(z2,arr2[i]);refreshresult()}
-   arr3[i].onclick = function (){cond(z3,arr3[i]);refreshresult()}
-   arr4[i].onclick = function (){cond(z4,arr4[i]);refreshresult()}
-   arr5[i].onclick = function (){cond(z5,arr5[i]);refreshresult()}
-   arr6[i].onclick = function (){cond(z6,arr6[i]);refreshresult()}
-   arr7[i].onclick = function (){cond(z7,arr7[i]);refreshresult()}
-   arr8[i].onclick = function (){cond(z8,arr8[i]);refreshresult()}
-   arr9[i].onclick = function (){cond(z9,arr9[i]);refreshresult()}
-   arr10[i].onclick = function (){cond(z10,arr10[i]);refreshresult()}
-   arr11[i].onclick = function (){cond(z11,arr11[i]);refreshresult()}
-   arr12[i].onclick = function (){cond(z12,arr12[i]);refreshresult()}
-   arr13[i].onclick = function (){cond(z13,arr13[i]);refreshresult()}
-   arr14[i].onclick = function (){cond(z14,arr14[i]);refreshresult()}
-   arr15[i].onclick = function (){cond(z15,arr15[i]);refreshresult()}
-   arr16[i].onclick = function (){cond(z16,arr16[i]);refreshresult()}
-   arr17[i].onclick = function (){cond(z17,arr17[i]);refreshresult()}
-   arr18[i].onclick = function (){cond(z18,arr18[i]);refreshresult()}
-   arr19[i].onclick = function (){cond(z19,arr19[i]);refreshresult()}
-   arr20[i].onclick = function (){cond(z20,arr20[i]);refreshresult()}
+for(let j=0; j<20; j++){
+   for(let i=1; i<5; i++){
+      arr[j][i].onclick = function (){cond(arr[j][0],arr[j][i]);refreshresult()} ;
+   }
+}
+//displaying results
+let refreshresult=function(){
+   for(i=1;i<5;i++){
+      arr[20][i-1].innerHTML=
+      Number(arr[0][i].textContent)+Number(arr[1][i].textContent)+Number(arr[2][i].textContent)+
+      Number(arr[3][i].textContent)+Number(arr[4][i].textContent)+Number(arr[5][i].textContent)+
+      Number(arr[6][i].textContent)+Number(arr[7][i].textContent)+Number(arr[8][i].textContent)+
+      Number(arr[9][i].textContent)+Number(arr[10][i].textContent)+Number(arr[11][i].textContent)+
+      Number(arr[12][i].textContent)+Number(arr[13][i].textContent)+Number(arr[14][i].textContent)+
+      Number(arr[15][i].textContent)+Number(arr[16][i].textContent)+Number(arr[17][i].textContent)+
+      Number(arr[18][i].textContent)+Number(arr[19][i].textContent)
+   }
 }
