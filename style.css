@@ -1,99 +1,114 @@
-#containerdiv{
-    border: 2px solid black;
-    width: 480px;
-    height: 700px;
-    text-align: center;
-    margin: auto;
-    background-color: darkgrey;
-    border-radius: 5px;
+#containerdiv {
+  border: 2px solid black;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: darkgrey;
+  border-radius: 5px;
+  max-width: 435px;
+  min-width: 300px;
+  position: relative;
 }
-#gamediv{
-    border: 1px solid black;
-    width: 460px;
-    height: 585px;
-    margin: 8px auto auto auto;
-    display: grid;
-    grid-template-rows: 35px 1fr 1fr 1fr 1fr 35px;
-    border: none;
+#gamediv {
+  border: 1px solid black;
+  margin: 8px;
+  border: none;
 }
-#commanddiv{
-    background-color:lightblue;
-    border: 1px solid;
-    text-align: center; 
-    display: grid;
-    grid-template-columns: 1fr 45px 1fr 1fr 1fr 1fr;
-    margin-bottom: 4px;
+#commanddiv {
+  background-color: lightblue;
+  border: 1px solid;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 30px 40px 1fr 1fr 1fr 1fr;
+  margin-bottom: 5px;
 }
-#player1div,#player3div,#player2div,#player4div{
-    background-color: antiquewhite;
-    border: 1px solid;
-    text-align: center;
-    display: grid;  
-    grid-template-columns: 1fr 45px 1fr 1fr 1fr 1fr;
-    grid-template-rows: 25px 25px 25px 25px 25px; 
-    margin-bottom: 4px;
+#player1div,
+#player3div,
+#player2div,
+#player4div {
+  background-color: antiquewhite;
+  border: 1px solid;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 30px 40px 1fr 1fr 1fr 1fr;
+  grid-template-rows: 25px 25px 25px 25px 25px;
+  margin-bottom: 4px;
 }
-#player2div,#player4div{
-    background-color:aliceblue;
+#player2div,
+#player4div {
+  background-color: aliceblue;
 }
-#resultdiv{
-    background-color:lightblue;
-    border: 1px solid;
-    text-align: center;   
-    display: grid;  
-    grid-template-columns: 128px 1fr 1fr 1fr 1fr;
+.w {
+  background-color: lightblue;
 }
-#col211,#col311,#col411,#col511{
-    grid-area: 1/1/6/2;
-    text-orientation:sideways;
-    writing-mode: vertical-lr;
-    font-size: large;
-    border: 1px solid black;
-    padding-left: 30px;
+#resultdiv {
+  background-color: lightblue;
+  border: 1px solid;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr 1fr 1fr;
 }
-.minidiv{
-    border: 1px solid black;
-    cursor: pointer;
-    padding-top: 2px;
+#col211,
+#col311,
+#col411,
+#col511 {
+  grid-area: 1/1/6/2;
+  text-orientation: sideways;
+  writing-mode: vertical-lr;
+  font-size: large;
+  border: 1px solid black;
+  padding-left: 3px;
 }
-.minidivc{
-    border: 1px solid black;
-    padding-top: 5px;
-
+.minidiv {
+  border: 1px solid black;
+  cursor: pointer;
+  padding-top: 2px;
 }
-.minidivr{
-    border: 1px solid black;
-    padding-top: 7px;
+.minidivc,
+.minidivr {
+  border: 1px solid black;
+  height: 23px;
+  padding-top: 5px;
 }
-#refreshbutton{
-    height: 28px;
-    width: 115px;
-    color: black;
-    background-color: gray;
-    cursor: pointer;
-    border-radius: 15px;
-    border-color: black ;
+.playersdiv {
+  margin-top: 20px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  max-width: 435px;
 }
-.minidivrb{
-    border: 1px solid black;
-    padding-top: 1.6px;
-    background-color: lightblue;
+#player1,
+#player2,
+#player3,
+#player4 {
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  height: 22px;
+  text-align: center;
+  width: 130px;
+  margin: 5px auto;
 }
-#player1,#player2,#player3,#player4{
-    margin: 30px 2px 15px 2px;
-    border: none;
-    border-radius: 5px;
-    width: 80px;
-    height: 22px;
-    text-align: center;
+#player1::placeholder,
+#player2::placeholder,
+#player3::placeholder,
+#player4::placeholder {
+  font-size: 14px;
+  text-align: center;
+  color: burlywood;
 }
-#player1::placeholder,#player2::placeholder,#player3::placeholder,#player4::placeholder{
-    font-size: 14px;
-    text-align: center;
-    color: burlywood;
+#col61 {
+  background-color: black;
+  color: white;
+  padding-top: 5px;
 }
-#col61{
-    background-color: black;
-    color: white;
-    padding-top: 5px;
+#submitbutton {
+  border-radius: 10px;
+  margin: 10px auto;
+}
+#refreshssbutton {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: brown;
+  border-radius: 20px;
 }
