@@ -19,7 +19,7 @@
   border: 1px solid;
   text-align: center;
   display: grid;
-  grid-template-columns: 30px 40px 1fr 1fr 1fr 1fr;
+  grid-template-columns: 30px 70px 1fr 1fr 1fr 1fr;
   margin-bottom: 5px;
 }
 #player1div,
@@ -30,7 +30,7 @@
   border: 1px solid;
   text-align: center;
   display: grid;
-  grid-template-columns: 30px 40px 1fr 1fr 1fr 1fr;
+  grid-template-columns: 30px 70px 1fr 1fr 1fr 1fr;
   grid-template-rows: 25px 25px 25px 25px 25px;
   margin-bottom: 4px;
 }
@@ -41,12 +41,15 @@
 .w {
   background-color: lightblue;
 }
+select {
+  background-color: lightblue;
+}
 #resultdiv {
   background-color: lightblue;
   border: 1px solid;
   text-align: center;
   display: grid;
-  grid-template-columns: 70px 1fr 1fr 1fr 1fr;
+  grid-template-columns: 100px 1fr 1fr 1fr 1fr;
 }
 #col211,
 #col311,
