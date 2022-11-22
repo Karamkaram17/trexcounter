@@ -171,7 +171,7 @@ for (let x = 0; x < 20; x++) {
       sessionStorage.getItem(`${letters[x]}${i}`)
     );
   }
-  arr[x][0].innerHTML = JSON.parse(sessionStorage.getItem(`z${x + 1}`));
+  arr[x][0].value = JSON.parse(sessionStorage.getItem(`z${x + 1}`));
 }
 v1.innerHTML = w1.innerHTML = JSON.parse(sessionStorage.getItem("player1"));
 v2.innerHTML = w2.innerHTML = JSON.parse(sessionStorage.getItem("player2"));
@@ -185,6 +185,9 @@ document.getElementById("refreshssbutton").onclick = () => {
 //automatic refresh result
 window.addEventListener("load", () => {
   refreshresult();
+  for (let j = 0; j < 20; j++) {
+    cond2(arr[j][0], j);
+  }
 });
 //displaying players names
 document.getElementById("submitbutton").onclick = function () {
@@ -201,23 +204,16 @@ document.getElementById("submitbutton").onclick = function () {
   v4.innerHTML = w4.innerHTML = pc4;
   sessionStorage.setItem(`player4`, JSON.stringify(pc4));
 };
-//displaying the type for each row
-let typecond = function (ref) {
-  let x = window.prompt(
-    `T: Trex \nL: Ltouch\nB: Banet\nD: Dinere\nR: Khoury koubba`
-  );
-  ref.innerHTML = x;
-};
 for (let j = 0; j < 20; j++) {
-  arr[j][0].onclick = function () {
-    typecond(arr[j][0]);
-    sessionStorage.setItem(`z${j + 1}`, JSON.stringify(arr[j][0].textContent));
+  arr[j][0].onchange = function () {
+    cond2(arr[j][0], j);
+    sessionStorage.setItem(`z${j + 1}`, JSON.stringify(arr[j][0].value));
   };
 }
 //displaying the calculation for each div
 let cond = function (reference, shownresult) {
   let numb = Number(window.prompt("Enter number of cards"));
-  let type = reference.textContent.toLowerCase().trim();
+  let type = reference.value;
   let x = shownresult;
   if (type == "l") {
     numb < 14 && numb > 0 ? (x.innerHTML = numb * -15) : (x.innerHTML = 0);
@@ -232,7 +228,7 @@ let cond = function (reference, shownresult) {
   }
 };
 let cond2 = function (reference, j) {
-  let type = reference.textContent.toLowerCase().trim();
+  let type = reference.value;
   let totalrowresult =
     Number(arr[j][1].textContent) +
     Number(arr[j][2].textContent) +
