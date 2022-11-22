@@ -31,7 +31,7 @@
   text-align: center;
   display: grid;
   grid-template-columns: 30px 70px 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto auto auto;
+  grid-template-rows: 25px 25px 25px 25px 25px;
   margin-bottom: 4px;
 }
 #player2div,
@@ -40,6 +40,7 @@
 }
 .w {
   background-color: lightblue;
+  padding: 0 !important;
 }
 select {
   background-color: lightblue;
@@ -66,7 +67,6 @@ select {
   border: 1px solid black;
   cursor: pointer;
   padding-top: 2px;
-  min-height: 22px;
 }
 .minidivc,
 .minidivr {
