@@ -118,6 +118,11 @@ let w1 = document.getElementById("col211");
 let w2 = document.getElementById("col311");
 let w3 = document.getElementById("col411");
 let w4 = document.getElementById("col511");
+//player names input
+let player1 = document.getElementById("player1");
+let player2 = document.getElementById("player2");
+let player3 = document.getElementById("player3");
+let player4 = document.getElementById("player4");
 //row arrays
 let arr = [
   [z1, a1, a2, a3, a4],
@@ -167,20 +172,42 @@ let letters = [
 //JSON
 for (let x = 0; x < 20; x++) {
   for (let i = 1; i < 5; i++) {
-    arr[x][i].innerHTML = JSON.parse(
-      sessionStorage.getItem(`${letters[x]}${i}`)
-    );
+    arr[x][i].innerHTML = JSON.parse(localStorage.getItem(`${letters[x]}${i}`));
   }
-  arr[x][0].value = JSON.parse(sessionStorage.getItem(`z${x + 1}`));
+  arr[x][0].value = JSON.parse(localStorage.getItem(`z${x + 1}`));
 }
-v1.innerHTML = w1.innerHTML = JSON.parse(sessionStorage.getItem("player1"));
-v2.innerHTML = w2.innerHTML = JSON.parse(sessionStorage.getItem("player2"));
-v3.innerHTML = w3.innerHTML = JSON.parse(sessionStorage.getItem("player3"));
-v4.innerHTML = w4.innerHTML = JSON.parse(sessionStorage.getItem("player4"));
+if (localStorage.getItem("player1")) {
+  player1.value =
+    v1.innerHTML =
+    w1.innerHTML =
+      JSON.parse(localStorage.getItem("player1"));
+}
+if (localStorage.getItem("player2")) {
+  player2.value =
+    v2.innerHTML =
+    w2.innerHTML =
+      JSON.parse(localStorage.getItem("player2"));
+}
+if (localStorage.getItem("player3")) {
+  player3.value =
+    v3.innerHTML =
+    w3.innerHTML =
+      JSON.parse(localStorage.getItem("player3"));
+}
+if (localStorage.getItem("player4")) {
+  player4.value =
+    v4.innerHTML =
+    w4.innerHTML =
+      JSON.parse(localStorage.getItem("player4"));
+}
 //manual refresh session storage and refresh page
 document.getElementById("refreshssbutton").onclick = () => {
-  sessionStorage.clear();
-  location.reload();
+  let res = window.confirm(`are you sure you want to reset ?`);
+  console.log(res);
+  if (res == true) {
+    localStorage.clear();
+    location.reload();
+  }
 };
 //automatic refresh result
 window.addEventListener("load", () => {
@@ -191,43 +218,112 @@ window.addEventListener("load", () => {
 });
 //displaying players names
 document.getElementById("submitbutton").onclick = function () {
-  let player1 = document.getElementById("player1").value;
-  v1.innerHTML = w1.innerHTML = player1;
-  sessionStorage.setItem(`player1`, JSON.stringify(player1));
-  let player2 = document.getElementById("player2").value;
-  v2.innerHTML = w2.innerHTML = player2;
-  sessionStorage.setItem(`player2`, JSON.stringify(player2));
-  let pc3 = document.getElementById("player3").value;
-  v3.innerHTML = w3.innerHTML = pc3;
-  sessionStorage.setItem(`player3`, JSON.stringify(pc3));
-  let pc4 = document.getElementById("player4").value;
-  v4.innerHTML = w4.innerHTML = pc4;
-  sessionStorage.setItem(`player4`, JSON.stringify(pc4));
+  v1.innerHTML = w1.innerHTML = player1.value;
+  localStorage.setItem(`player1`, JSON.stringify(player1.value));
+  v2.innerHTML = w2.innerHTML = player2.value;
+  localStorage.setItem(`player2`, JSON.stringify(player2.value));
+  v3.innerHTML = w3.innerHTML = player3.value;
+  localStorage.setItem(`player3`, JSON.stringify(player3.value));
+  v4.innerHTML = w4.innerHTML = player4.value;
+  localStorage.setItem(`player4`, JSON.stringify(player4.value));
 };
 for (let j = 0; j < 20; j++) {
   arr[j][0].onchange = function () {
     cond2(arr[j][0], j);
-    sessionStorage.setItem(`z${j + 1}`, JSON.stringify(arr[j][0].value));
+    localStorage.setItem(`z${j + 1}`, JSON.stringify(arr[j][0].value));
   };
 }
 //displaying the calculation for each div
-let cond = function (reference, shownresult) {
-  let numb = Number(window.prompt("Enter number of cards"));
+let cond = function (reference, x, j) {
   let type = reference.value;
-  let x = shownresult;
+  let msg;
+  let numb;
   if (type == "l") {
-    numb < 14 && numb > 0 ? (x.innerHTML = numb * -15) : (x.innerHTML = 0);
+    msg =
+      13 -
+      (arr[j][1].innerText ? Number(arr[j][1].innerText) / -15 : 0) -
+      (arr[j][2].innerText ? Number(arr[j][2].innerText) / -15 : 0) -
+      (arr[j][3].innerText ? Number(arr[j][3].innerText) / -15 : 0) -
+      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -15 : 0);
+    msg != 0
+      ? (numb = parseInt(
+          window.prompt(`Enter number of cards between 0 & ${msg} `)
+        ))
+      : (numb = parseInt(window.prompt(`Enter 0`)));
   } else if (type == "t") {
-    numb < 5 && numb > 0 ? (x.innerHTML = 250 - numb * 50) : (x.innerHTML = 0);
+    msg = [1, 2, 3, 4];
+    arr[j][1].innerText > 0
+      ? msg.splice(msg.indexOf(5 - Number(arr[j][1].innerText) / 50), 1)
+      : (msg = msg);
+    arr[j][2].innerText > 0
+      ? msg.splice(msg.indexOf(5 - Number(arr[j][2].innerText) / 50), 1)
+      : (msg = msg);
+    arr[j][3].innerText > 0
+      ? msg.splice(msg.indexOf(5 - Number(arr[j][3].innerText) / 50), 1)
+      : (msg = msg);
+    arr[j][4].innerText > 0
+      ? msg.splice(msg.indexOf(5 - Number(arr[j][4].innerText) / 50), 1)
+      : (msg = msg);
+    msg.length == 0
+      ? (numb = Number(window.prompt(`Enter 0`)))
+      : msg.length == 1
+      ? (numb = Number(window.prompt(`Enter the following number ${msg} `)))
+      : (numb = Number(
+          window.prompt(`Enter one of the following numbers ${msg} `)
+        ));
   } else if (type == "b") {
-    numb < 5 && numb > 0 ? (x.innerHTML = numb * -25) : (x.innerHTML = 0);
+    msg =
+      4 -
+      (arr[j][1].innerText ? Number(arr[j][1].innerText) / -25 : 0) -
+      (arr[j][2].innerText ? Number(arr[j][2].innerText) / -25 : 0) -
+      (arr[j][3].innerText ? Number(arr[j][3].innerText) / -25 : 0) -
+      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -25 : 0);
+    msg != 0
+      ? (numb = parseInt(
+          window.prompt(`Enter number of cards between 0 & ${msg} `)
+        ))
+      : (numb = parseInt(window.prompt(`Enter 0`)));
   } else if (type == "d") {
-    numb < 14 && numb > 0 ? (x.innerHTML = numb * -10) : (x.innerHTML = 0);
+    msg =
+      13 -
+      (arr[j][1].innerText ? Number(arr[j][1].innerText) / -10 : 0) -
+      (arr[j][2].innerText ? Number(arr[j][2].innerText) / -10 : 0) -
+      (arr[j][3].innerText ? Number(arr[j][3].innerText) / -10 : 0) -
+      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -10 : 0);
+    msg != 0
+      ? (numb = parseInt(
+          window.prompt(`Enter number of cards between 0 & ${msg} `)
+        ))
+      : (numb = parseInt(window.prompt(`Enter 0`)));
   } else if (type == "r") {
-    numb == 1 ? (x.innerHTML = numb * -75) : (x.innerHTML = 0);
+    msg =
+      1 -
+      (arr[j][1].innerText ? Number(arr[j][1].innerText) / -75 : 0) -
+      (arr[j][2].innerText ? Number(arr[j][2].innerText) / -75 : 0) -
+      (arr[j][3].innerText ? Number(arr[j][3].innerText) / -75 : 0) -
+      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -75 : 0);
+    msg != 0
+      ? (numb = parseInt(window.prompt(`Enter 0 or 1 `)))
+      : (numb = parseInt(window.prompt(`Enter 0`)));
+  }
+  if (type == "l") {
+    numb < msg + 1 && numb > 0 ? (x.innerHTML = numb * -15) : (x.innerHTML = 0);
+  } else if (type == "t") {
+    if (msg.includes(numb) || numb == 0) {
+      numb < 5 && numb > 0
+        ? (x.innerHTML = 250 - numb * 50)
+        : (x.innerHTML = 0);
+    }
+  } else if (type == "b") {
+    numb < msg + 1 && numb > 0 ? (x.innerHTML = numb * -25) : (x.innerHTML = 0);
+  } else if (type == "d") {
+    numb < msg + 1 && numb > 0 ? (x.innerHTML = numb * -10) : (x.innerHTML = 0);
+  } else if (type == "r") {
+    numb == msg ? (x.innerHTML = numb * -75) : (x.innerHTML = 0);
   }
 };
 let cond2 = function (reference, j) {
+  let parent = reference.parentNode;
   let type = reference.value;
   let totalrowresult =
     Number(arr[j][1].textContent) +
@@ -236,18 +332,22 @@ let cond2 = function (reference, j) {
     Number(arr[j][4].textContent);
   let op1 = () => {
     reference.style.backgroundColor = "lightblue";
+    parent.style.backgroundColor = "lightblue";
   };
-  let op2 = (reference.style.backgroundColor = "red");
+  let op2 = () => {
+    reference.style.backgroundColor = "red";
+    parent.style.backgroundColor = "red";
+  };
   if (type == "l") {
-    totalrowresult == -195 ? op1() : op2;
+    totalrowresult == -195 ? op1() : op2();
   } else if (type == "t") {
-    totalrowresult == 500 ? op1() : op2;
+    totalrowresult == 500 ? op1() : op2();
   } else if (type == "b") {
-    totalrowresult == -100 ? op1() : op2;
+    totalrowresult == -100 ? op1() : op2();
   } else if (type == "d") {
-    totalrowresult == -130 ? op1() : op2;
+    totalrowresult == -130 ? op1() : op2();
   } else if (type == "r") {
-    totalrowresult == -75 ? op1() : op2;
+    totalrowresult == -75 ? op1() : op2();
   } else {
     op1();
   }
@@ -265,10 +365,10 @@ let refreshresult = function () {
 for (let j = 0; j < 20; j++) {
   for (let i = 1; i < 5; i++) {
     arr[j][i].onclick = function () {
-      cond(arr[j][0], arr[j][i]);
+      cond(arr[j][0], arr[j][i], j);
       cond2(arr[j][0], j);
       refreshresult();
-      sessionStorage.setItem(
+      localStorage.setItem(
         `${letters[j]}${i}`,
         JSON.stringify(arr[j][i].textContent)
       );
