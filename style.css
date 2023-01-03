@@ -10,9 +10,7 @@
   position: relative;
 }
 #gamediv {
-  border: 1px solid black;
   margin: 8px;
-  border: none;
 }
 #commanddiv {
   background-color: lightblue;
@@ -74,6 +72,7 @@ select {
   border: 1px solid black;
   height: 23px;
   padding-top: 5px;
+  overflow-x: hidden;
 }
 .playersdiv {
   margin-top: 20px;
@@ -109,6 +108,7 @@ select {
 #submitbutton {
   border-radius: 10px;
   margin: 10px auto;
+  cursor: pointer;
 }
 #refreshssbutton {
   position: absolute;
@@ -116,4 +116,5 @@ select {
   bottom: 0;
   background-color: brown;
   border-radius: 20px;
+  cursor: pointer;
 }

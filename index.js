@@ -1,3 +1,4 @@
+let select = document.getElementsByTagName("select");
 //type column variables
 let z1 = document.getElementById("col212");
 let z2 = document.getElementById("col222");
@@ -330,9 +331,14 @@ let cond2 = function (reference, j) {
     Number(arr[j][2].textContent) +
     Number(arr[j][3].textContent) +
     Number(arr[j][4].textContent);
+  let op0 = () => {
+    reference.style.backgroundColor = "lightblue";
+    parent.style.backgroundColor = "lightblue";
+  };
   let op1 = () => {
     reference.style.backgroundColor = "lightblue";
     parent.style.backgroundColor = "lightblue";
+    select[j + 1] ? select[j + 1].removeAttribute("disabled") : null;
   };
   let op2 = () => {
     reference.style.backgroundColor = "red";
@@ -349,7 +355,7 @@ let cond2 = function (reference, j) {
   } else if (type == "r") {
     totalrowresult == -75 ? op1() : op2();
   } else {
-    op1();
+    op0();
   }
 };
 //displaying results
