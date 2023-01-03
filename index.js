@@ -235,7 +235,7 @@ for (let j = 0; j < 20; j++) {
   };
 }
 //displaying the calculation for each div
-let cond = function (reference, x, j) {
+let cond = function (reference, x, j, i) {
   let type = reference.value;
   let msg;
   let numb;
@@ -245,7 +245,8 @@ let cond = function (reference, x, j) {
       (arr[j][1].innerText ? Number(arr[j][1].innerText) / -15 : 0) -
       (arr[j][2].innerText ? Number(arr[j][2].innerText) / -15 : 0) -
       (arr[j][3].innerText ? Number(arr[j][3].innerText) / -15 : 0) -
-      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -15 : 0);
+      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -15 : 0) +
+      (arr[j][i].innerText ? Number(arr[j][i].innerText) / -15 : 0);
     msg != 0
       ? (numb = parseInt(
           window.prompt(`Enter number of cards between 0 & ${msg} `)
@@ -253,18 +254,13 @@ let cond = function (reference, x, j) {
       : (numb = parseInt(window.prompt(`Enter 0`)));
   } else if (type == "t") {
     msg = [1, 2, 3, 4];
-    arr[j][1].innerText > 0
-      ? msg.splice(msg.indexOf(5 - Number(arr[j][1].innerText) / 50), 1)
-      : (msg = msg);
-    arr[j][2].innerText > 0
-      ? msg.splice(msg.indexOf(5 - Number(arr[j][2].innerText) / 50), 1)
-      : (msg = msg);
-    arr[j][3].innerText > 0
-      ? msg.splice(msg.indexOf(5 - Number(arr[j][3].innerText) / 50), 1)
-      : (msg = msg);
-    arr[j][4].innerText > 0
-      ? msg.splice(msg.indexOf(5 - Number(arr[j][4].innerText) / 50), 1)
-      : (msg = msg);
+    for (let k = 1; k < 5; k++) {
+      if (i != k) {
+        arr[j][k].innerText > 0
+          ? msg.splice(msg.indexOf(5 - Number(arr[j][k].innerText) / 50), 1)
+          : (msg = msg);
+      }
+    }
     msg.length == 0
       ? (numb = Number(window.prompt(`Enter 0`)))
       : msg.length == 1
@@ -278,7 +274,8 @@ let cond = function (reference, x, j) {
       (arr[j][1].innerText ? Number(arr[j][1].innerText) / -25 : 0) -
       (arr[j][2].innerText ? Number(arr[j][2].innerText) / -25 : 0) -
       (arr[j][3].innerText ? Number(arr[j][3].innerText) / -25 : 0) -
-      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -25 : 0);
+      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -25 : 0) +
+      (arr[j][i].innerText ? Number(arr[j][i].innerText) / -25 : 0);
     msg != 0
       ? (numb = parseInt(
           window.prompt(`Enter number of cards between 0 & ${msg} `)
@@ -290,7 +287,8 @@ let cond = function (reference, x, j) {
       (arr[j][1].innerText ? Number(arr[j][1].innerText) / -10 : 0) -
       (arr[j][2].innerText ? Number(arr[j][2].innerText) / -10 : 0) -
       (arr[j][3].innerText ? Number(arr[j][3].innerText) / -10 : 0) -
-      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -10 : 0);
+      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -10 : 0) +
+      (arr[j][i].innerText ? Number(arr[j][i].innerText) / -10 : 0);
     msg != 0
       ? (numb = parseInt(
           window.prompt(`Enter number of cards between 0 & ${msg} `)
@@ -302,7 +300,8 @@ let cond = function (reference, x, j) {
       (arr[j][1].innerText ? Number(arr[j][1].innerText) / -75 : 0) -
       (arr[j][2].innerText ? Number(arr[j][2].innerText) / -75 : 0) -
       (arr[j][3].innerText ? Number(arr[j][3].innerText) / -75 : 0) -
-      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -75 : 0);
+      (arr[j][4].innerText ? Number(arr[j][4].innerText) / -75 : 0) +
+      (arr[j][i].innerText ? Number(arr[j][i].innerText) / -75 : 0);
     msg != 0
       ? (numb = parseInt(window.prompt(`Enter 0 or 1 `)))
       : (numb = parseInt(window.prompt(`Enter 0`)));
@@ -371,7 +370,7 @@ let refreshresult = function () {
 for (let j = 0; j < 20; j++) {
   for (let i = 1; i < 5; i++) {
     arr[j][i].onclick = function () {
-      cond(arr[j][0], arr[j][i], j);
+      cond(arr[j][0], arr[j][i], j, i);
       cond2(arr[j][0], j);
       refreshresult();
       localStorage.setItem(
