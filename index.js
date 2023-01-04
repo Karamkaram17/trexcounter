@@ -18,7 +18,7 @@ let player4 = document.getElementById("player4");
 
 //JSON
 //displaying the available select elements
-for (j = 1; j < 21; j++) {
+for (let j = 1; j < 21; j++) {
   let typenb = `type${j}`;
   let typedestination = document.getElementById(`${typenb}`);
   localStorage.getItem(`${typenb}`)
@@ -28,9 +28,9 @@ for (j = 1; j < 21; j++) {
     : null;
 }
 //displaying the available calculation
-for (i = 3; i < 7; i++) {
-  for (k = 1; k < 6; k++) {
-    for (j = 2; j < 6; j++) {
+for (let i = 3; i < 7; i++) {
+  for (let k = 1; k < 6; k++) {
+    for (let j = 2; j < 6; j++) {
       let name = `col${j}${k}${i}`;
       let target = document.getElementById(`${name}`);
       target.innerHTML = JSON.parse(localStorage.getItem(`${name}`));
@@ -38,8 +38,8 @@ for (i = 3; i < 7; i++) {
   }
 }
 //displaying the available selected types
-for (k = 1; k < 6; k++) {
-  for (j = 2; j < 6; j++) {
+for (let k = 1; k < 6; k++) {
+  for (let j = 2; j < 6; j++) {
     let name = `col${j}${k}2`;
     if (document.getElementById(`${name}`)) {
       let target = document.getElementById(`${name}`);
@@ -49,7 +49,7 @@ for (k = 1; k < 6; k++) {
   }
 }
 //displaying available names
-for (j = 1; j < 5; j++) {
+for (let j = 1; j < 5; j++) {
   let playertarget = document.getElementById(`player${j}`);
   let namee = document.getElementById(`col1${j + 2}`);
   let nameee = document.getElementById(`col${j + 1}11`);
@@ -311,10 +311,10 @@ function newSelect(referenceId, i, p) {
 
 //displaying results
 let refreshresult = function () {
-  for (i = 3; i < 7; i++) {
+  for (let i = 3; i < 7; i++) {
     let res = 0;
-    for (k = 1; k < 6; k++) {
-      for (j = 2; j < 6; j++) {
+    for (let k = 1; k < 6; k++) {
+      for (let j = 2; j < 6; j++) {
         let target = document.getElementById(`col${j}${k}${i}`);
         let result = document.getElementById(`col6${i - 1}`);
         result.innerHTML = res += Number(target.textContent);
