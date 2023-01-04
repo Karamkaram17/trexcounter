@@ -324,11 +324,9 @@ let refreshresult = function () {
 function json1() {
   for (let j = 1; j < 21; j++) {
     let typenb = `type${j}`;
-    let typedestination = document.getElementById(
-      `${typenb}`
-    ) as HTMLDivElement;
+    let target = document.getElementById(`${typenb}`) as HTMLDivElement;
     let storage = localStorage.getItem(`${typenb}`);
-    storage ? (typedestination.innerHTML = JSON.parse(storage)) : null;
+    storage ? (target.innerHTML = JSON.parse(storage)) : null;
   }
 }
 //displaying the available calculation
@@ -339,22 +337,20 @@ function json2() {
         let name = `col${j}${k}${i}`;
         let target = document.getElementById(`${name}`) as HTMLDivElement;
         let storage = localStorage.getItem(`${name}`);
-        if (storage) {
-          target.innerHTML = JSON.parse(storage);
-        }
+        storage ? (target.innerHTML = JSON.parse(storage)) : null;
       }
     }
   }
 }
 //displaying the available selected types
 function json3() {
-  for (let k = 1; k < 6; k++) {
-    for (let j = 2; j < 6; j++) {
+  for (let j = 2; j < 6; j++) {
+    for (let k = 1; k < 6; k++) {
       let name = `col${j}${k}2`;
-      if (document.getElementById(`${name}`)) {
+      let target = document.getElementById(`${name}`) as HTMLSelectElement;
+      if (target) {
         let storage = localStorage.getItem(`${name}`);
         if (storage) {
-          let target = document.getElementById(`${name}`) as HTMLDataElement;
           target.value = JSON.parse(storage);
           cond2(target.id);
         }
@@ -371,11 +367,11 @@ function json4() {
     let namee = document.getElementById(`col1${j + 2}`) as HTMLDivElement;
     let nameee = document.getElementById(`col${j + 1}11`) as HTMLDivElement;
     let storage = localStorage.getItem(`player${j}`);
-    if (storage) {
-      playertarget.value =
-        namee.innerHTML =
-        nameee.innerHTML =
-          JSON.parse(storage);
-    }
+    storage
+      ? (playertarget.value =
+          namee.innerHTML =
+          nameee.innerHTML =
+            JSON.parse(storage))
+      : null;
   }
 }
