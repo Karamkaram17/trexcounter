@@ -42,35 +42,33 @@ window.addEventListener("load", () => {
 gameDOM.addEventListener("click", function (event: any) {
   let targetID: string = event.target.id;
   let reference = document.getElementById(
-    `${rLC(targetID) + 2}`
+    `${rLC(targetID) + "2"}`
   ) as HTMLSelectElement;
   let x = document.getElementById(`${targetID}`) as HTMLDataElement;
-  if (x) {
-    if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-      x.value
-        ? localStorage.setItem(`${targetID}`, JSON.stringify(x.value))
-        : null;
-      reference.onchange = cond2(targetID);
-    }
-    if (targetID.length == 6 && Number(targetID[targetID.length - 1]) > 2) {
-      if (document.getElementById(`${rLC(targetID) + 2}`)) {
-        let v1 = document.getElementById(
-          `${rLC(targetID) + 3}`
-        ) as HTMLDivElement;
-        let v2 = document.getElementById(
-          `${rLC(targetID) + 4}`
-        ) as HTMLDivElement;
-        let v3 = document.getElementById(
-          `${rLC(targetID) + 5}`
-        ) as HTMLDivElement;
-        let v4 = document.getElementById(
-          `${rLC(targetID) + 6}`
-        ) as HTMLDivElement;
-        cond(targetID, reference, v1, v2, v3, v4, x);
-        cond2(targetID);
-        refreshresult();
-        localStorage.setItem(`${targetID}`, JSON.stringify(x.textContent));
-      }
+  if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
+    reference.onchange = cond2(targetID);
+    x.value
+      ? localStorage.setItem(`${targetID}`, JSON.stringify(x.value))
+      : null;
+  }
+  if (targetID.length == 6 && Number(targetID[targetID.length - 1]) > 2) {
+    if (document.getElementById(`${rLC(targetID) + 2}`)) {
+      let v1 = document.getElementById(
+        `${rLC(targetID) + 3}`
+      ) as HTMLDivElement;
+      let v2 = document.getElementById(
+        `${rLC(targetID) + 4}`
+      ) as HTMLDivElement;
+      let v3 = document.getElementById(
+        `${rLC(targetID) + 5}`
+      ) as HTMLDivElement;
+      let v4 = document.getElementById(
+        `${rLC(targetID) + 6}`
+      ) as HTMLDivElement;
+      cond(targetID, reference, v1, v2, v3, v4, x);
+      cond2(targetID);
+      refreshresult();
+      localStorage.setItem(`${targetID}`, JSON.stringify(x.textContent));
     }
   }
 });

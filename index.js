@@ -38,26 +38,24 @@ window.addEventListener("load", function () {
 //page operator
 gameDOM.addEventListener("click", function (event) {
     var targetID = event.target.id;
-    var reference = document.getElementById("".concat(rLC(targetID) + 2));
+    var reference = document.getElementById("".concat(rLC(targetID) + "2"));
     var x = document.getElementById("".concat(targetID));
-    if (x) {
-        if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-            x.value
-                ? localStorage.setItem("".concat(targetID), JSON.stringify(x.value))
-                : null;
-            reference.onchange = cond2(targetID);
-        }
-        if (targetID.length == 6 && Number(targetID[targetID.length - 1]) > 2) {
-            if (document.getElementById("".concat(rLC(targetID) + 2))) {
-                var v1 = document.getElementById("".concat(rLC(targetID) + 3));
-                var v2 = document.getElementById("".concat(rLC(targetID) + 4));
-                var v3 = document.getElementById("".concat(rLC(targetID) + 5));
-                var v4 = document.getElementById("".concat(rLC(targetID) + 6));
-                cond(targetID, reference, v1, v2, v3, v4, x);
-                cond2(targetID);
-                refreshresult();
-                localStorage.setItem("".concat(targetID), JSON.stringify(x.textContent));
-            }
+    if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
+        reference.onchange = cond2(targetID);
+        x.value
+            ? localStorage.setItem("".concat(targetID), JSON.stringify(x.value))
+            : null;
+    }
+    if (targetID.length == 6 && Number(targetID[targetID.length - 1]) > 2) {
+        if (document.getElementById("".concat(rLC(targetID) + 2))) {
+            var v1 = document.getElementById("".concat(rLC(targetID) + 3));
+            var v2 = document.getElementById("".concat(rLC(targetID) + 4));
+            var v3 = document.getElementById("".concat(rLC(targetID) + 5));
+            var v4 = document.getElementById("".concat(rLC(targetID) + 6));
+            cond(targetID, reference, v1, v2, v3, v4, x);
+            cond2(targetID);
+            refreshresult();
+            localStorage.setItem("".concat(targetID), JSON.stringify(x.textContent));
         }
     }
 });
