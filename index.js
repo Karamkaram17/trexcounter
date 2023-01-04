@@ -290,9 +290,9 @@ var refreshresult = function () {
 function json1() {
     for (var j = 1; j < 21; j++) {
         var typenb = "type".concat(j);
-        var typedestination = document.getElementById("".concat(typenb));
+        var target = document.getElementById("".concat(typenb));
         var storage = localStorage.getItem("".concat(typenb));
-        storage ? (typedestination.innerHTML = JSON.parse(storage)) : null;
+        storage ? (target.innerHTML = JSON.parse(storage)) : null;
     }
 }
 //displaying the available calculation
@@ -303,22 +303,20 @@ function json2() {
                 var name_1 = "col".concat(j).concat(k).concat(i);
                 var target = document.getElementById("".concat(name_1));
                 var storage = localStorage.getItem("".concat(name_1));
-                if (storage) {
-                    target.innerHTML = JSON.parse(storage);
-                }
+                storage ? (target.innerHTML = JSON.parse(storage)) : null;
             }
         }
     }
 }
 //displaying the available selected types
 function json3() {
-    for (var k = 1; k < 6; k++) {
-        for (var j = 2; j < 6; j++) {
+    for (var j = 2; j < 6; j++) {
+        for (var k = 1; k < 6; k++) {
             var name_2 = "col".concat(j).concat(k, "2");
-            if (document.getElementById("".concat(name_2))) {
+            var target = document.getElementById("".concat(name_2));
+            if (target) {
                 var storage = localStorage.getItem("".concat(name_2));
                 if (storage) {
-                    var target = document.getElementById("".concat(name_2));
                     target.value = JSON.parse(storage);
                     cond2(target.id);
                 }
@@ -333,11 +331,11 @@ function json4() {
         var namee = document.getElementById("col1".concat(j + 2));
         var nameee = document.getElementById("col".concat(j + 1, "11"));
         var storage = localStorage.getItem("player".concat(j));
-        if (storage) {
-            playertarget.value =
+        storage
+            ? (playertarget.value =
                 namee.innerHTML =
                     nameee.innerHTML =
-                        JSON.parse(storage);
-        }
+                        JSON.parse(storage))
+            : null;
     }
 }
