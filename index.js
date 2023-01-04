@@ -41,7 +41,7 @@ gameDOM.addEventListener("click", function (event) {
     var reference = document.getElementById("".concat(rLC(targetID) + "2"));
     var x = document.getElementById("".concat(targetID));
     if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-        reference.onchange = cond2(targetID);
+        // reference.onchange = cond2(targetID);
         x.value
             ? localStorage.setItem("".concat(targetID), JSON.stringify(x.value))
             : null;
@@ -316,7 +316,7 @@ function json3() {
                 var storage = localStorage.getItem("".concat(name_2));
                 if (storage) {
                     target.value = JSON.parse(storage);
-                    cond2(target.id);
+                    // cond2(target.id);
                 }
             }
         }

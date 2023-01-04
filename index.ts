@@ -46,7 +46,7 @@ gameDOM.addEventListener("click", function (event: any) {
   ) as HTMLSelectElement;
   let x = document.getElementById(`${targetID}`) as HTMLDataElement;
   if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-    reference.onchange = cond2(targetID);
+    // reference.onchange = cond2(targetID);
     x.value
       ? localStorage.setItem(`${targetID}`, JSON.stringify(x.value))
       : null;
@@ -350,7 +350,7 @@ function json3() {
         let storage = localStorage.getItem(`${name}`);
         if (storage) {
           target.value = JSON.parse(storage);
-          cond2(target.id);
+          // cond2(target.id);
         }
       }
     }
