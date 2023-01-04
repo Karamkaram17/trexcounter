@@ -72,13 +72,13 @@ submitBtn.addEventListener("click", function () {
 
 //functions for editing strings
 function rLC(str) {
-  return str.substring(0, str.length - 1);
+  return str.slice(0, -1);
 }
 function rL2C(str) {
-  return str.substring(0, str.length - 2);
+  return str.slice(0, -2);
 }
 function rL3C(str) {
-  return str.substring(0, str.length - 3);
+  return str.slice(0, -3);
 }
 //function to determine type and giving according to type available choises for user to choose from
 let cond = function (targetID, reference, v1, v2, v3, v4, x) {
