@@ -16,50 +16,6 @@ let player2 = document.getElementById("player2");
 let player3 = document.getElementById("player3");
 let player4 = document.getElementById("player4");
 
-//JSON
-//displaying the available select elements
-for (let j = 1; j < 21; j++) {
-  let typenb = `type${j}`;
-  let typedestination = document.getElementById(`${typenb}`);
-  localStorage.getItem(`${typenb}`)
-    ? (typedestination.innerHTML = JSON.parse(
-        localStorage.getItem(`${typenb}`)
-      ))
-    : null;
-}
-//displaying the available calculation
-for (let i = 3; i < 7; i++) {
-  for (let k = 1; k < 6; k++) {
-    for (let j = 2; j < 6; j++) {
-      let name = `col${j}${k}${i}`;
-      let target = document.getElementById(`${name}`);
-      target.innerHTML = JSON.parse(localStorage.getItem(`${name}`));
-    }
-  }
-}
-//displaying the available selected types
-for (let k = 1; k < 6; k++) {
-  for (let j = 2; j < 6; j++) {
-    let name = `col${j}${k}2`;
-    if (document.getElementById(`${name}`)) {
-      let target = document.getElementById(`${name}`);
-      target.value = JSON.parse(localStorage.getItem(`${name}`));
-      cond2(target.id);
-    }
-  }
-}
-//displaying available names
-for (let j = 1; j < 5; j++) {
-  let playertarget = document.getElementById(`player${j}`);
-  let namee = document.getElementById(`col1${j + 2}`);
-  let nameee = document.getElementById(`col${j + 1}11`);
-  playertarget.value =
-    namee.innerHTML =
-    nameee.innerHTML =
-      JSON.parse(localStorage.getItem(`player${j}`));
-}
-//========= end of json ===========
-
 //manual refresh session storage and refresh page
 document.getElementById("refreshssbutton").onclick = () => {
   let res = window.confirm(`are you sure you want to reset ?`);
@@ -71,6 +27,10 @@ document.getElementById("refreshssbutton").onclick = () => {
 
 //automatic refresh result
 window.addEventListener("load", () => {
+  json1();
+  json2();
+  json3();
+  json4();
   refreshresult();
 });
 
@@ -322,3 +282,54 @@ let refreshresult = function () {
     }
   }
 };
+
+//JSON
+//displaying the available select elements
+function json1() {
+  for (let j = 1; j < 21; j++) {
+    let typenb = `type${j}`;
+    let typedestination = document.getElementById(`${typenb}`);
+    localStorage.getItem(`${typenb}`)
+      ? (typedestination.innerHTML = JSON.parse(
+          localStorage.getItem(`${typenb}`)
+        ))
+      : null;
+  }
+}
+//displaying the available calculation
+function json2() {
+  for (let i = 3; i < 7; i++) {
+    for (let k = 1; k < 6; k++) {
+      for (let j = 2; j < 6; j++) {
+        let name = `col${j}${k}${i}`;
+        let target = document.getElementById(`${name}`);
+        target.innerHTML = JSON.parse(localStorage.getItem(`${name}`));
+      }
+    }
+  }
+}
+//displaying the available selected types
+function json3() {
+  for (let k = 1; k < 6; k++) {
+    for (let j = 2; j < 6; j++) {
+      let name = `col${j}${k}2`;
+      if (document.getElementById(`${name}`)) {
+        let target = document.getElementById(`${name}`);
+        target.value = JSON.parse(localStorage.getItem(`${name}`));
+        cond2(target.id);
+      }
+    }
+  }
+}
+//displaying available names
+function json4() {
+  for (let j = 1; j < 5; j++) {
+    let playertarget = document.getElementById(`player${j}`);
+    let namee = document.getElementById(`col1${j + 2}`);
+    let nameee = document.getElementById(`col${j + 1}11`);
+    playertarget.value =
+      namee.innerHTML =
+      nameee.innerHTML =
+        JSON.parse(localStorage.getItem(`player${j}`));
+  }
+}
