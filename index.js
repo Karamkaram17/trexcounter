@@ -214,35 +214,36 @@ function newSelect(referenceId, i, p) {
         select.id = "col".concat(i).concat(nbplus, "2");
         var place2 = document.getElementById("type".concat(typenbplus));
         if (place2.innerHTML == "") {
-            var types = ["", "t", "l", "r", "b", "d"];
+            var types = ["t", "l", "r", "b", "d"];
             for (var j = 1; j < 5; j++) {
                 var target = document.getElementById("col".concat(i).concat(j, "2"));
                 target ? types.splice(types.indexOf(target.value), 1) : null;
             }
             types.forEach(function (elm) {
-                elm == ""
-                    ? (select.innerHTML += "<option value=\"\"></option>")
-                    : elm == "t"
-                        ? (select.innerHTML += "<option value=\"t\">Trex</option>")
-                        : elm == "r"
-                            ? (select.innerHTML += "<option value=\"r\">R<span>&hearts;</span></option>")
-                            : elm == "l"
-                                ? (select.innerHTML += "<option value=\"l\">Ltouch</option>")
-                                : elm == "b"
-                                    ? (select.innerHTML += "<option value=\"b\">Banet</option>")
-                                    : elm == "d"
-                                        ? (select.innerHTML += "<option value=\"d\">&diams;</option>")
-                                        : null;
+                elm == "t"
+                    ? (select.innerHTML += "<option value=\"t\">Trex</option>")
+                    : elm == "r"
+                        ? (select.innerHTML += "<option value=\"r\">R<span>&hearts;</span></option>")
+                        : elm == "l"
+                            ? (select.innerHTML += "<option value=\"l\">Ltouch</option>")
+                            : elm == "b"
+                                ? (select.innerHTML += "<option value=\"b\">Banet</option>")
+                                : elm == "d"
+                                    ? (select.innerHTML += "<option value=\"d\">&diams;</option>")
+                                    : null;
             });
+            select.style.backgroundColor = "red";
+            place2.style.backgroundColor = "red";
             place2.appendChild(select);
             localStorage.setItem("type".concat(typenbplus), JSON.stringify(place2.innerHTML));
         }
     }
     if (nb == 5) {
-        if (document.getElementById("type".concat(typenbplus))) {
-            var target = document.getElementById("type".concat(typenbplus));
+        var target = document.getElementById("type".concat(typenbplus));
+        if (target) {
             if (target.innerHTML == "") {
-                target.innerHTML = "<select id=\"col".concat(i + 1, "12\"><option value=\"\"></option><option value=\"t\">Trex</option><option value=\"r\">R<span>&hearts;</span></option><option value=\"l\">Ltouch</option><option value=\"b\">Banet</option><option value=\"d\">&diams;</option></select>");
+                target.style.backgroundColor = "red";
+                target.innerHTML = "<select style=\"background-color: red\" id=\"col".concat(i + 1, "12\"><option value=\"t\">Trex</option><option value=\"r\">R<span>&hearts;</span></option><option value=\"l\">Ltouch</option><option value=\"b\">Banet</option><option value=\"d\">&diams;</option></select>");
                 localStorage.setItem("type".concat(typenbplus), JSON.stringify(target.innerHTML));
             }
         }

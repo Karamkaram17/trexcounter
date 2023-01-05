@@ -237,15 +237,13 @@ function newSelect(referenceId: string, i: number, p: number) {
     select.id = `col${i}${nbplus}2`;
     let place2 = document.getElementById(`type${typenbplus}`) as HTMLDivElement;
     if (place2.innerHTML == "") {
-      let types: string[] = ["", "t", "l", "r", "b", "d"];
+      let types: string[] = ["t", "l", "r", "b", "d"];
       for (let j = 1; j < 5; j++) {
         let target = document.getElementById(`col${i}${j}2`) as HTMLDataElement;
         target ? types.splice(types.indexOf(target.value), 1) : null;
       }
       types.forEach((elm) => {
-        elm == ""
-          ? (select.innerHTML += `<option value=""></option>`)
-          : elm == "t"
+        elm == "t"
           ? (select.innerHTML += `<option value="t">Trex</option>`)
           : elm == "r"
           ? (select.innerHTML += `<option value="r">R<span>&hearts;</span></option>`)
@@ -257,6 +255,8 @@ function newSelect(referenceId: string, i: number, p: number) {
           ? (select.innerHTML += `<option value="d">&diams;</option>`)
           : null;
       });
+      select.style.backgroundColor = "red";
+      place2.style.backgroundColor = "red";
       place2.appendChild(select);
       localStorage.setItem(
         `type${typenbplus}`,
@@ -265,14 +265,13 @@ function newSelect(referenceId: string, i: number, p: number) {
     }
   }
   if (nb == 5) {
-    if (document.getElementById(`type${typenbplus}`)) {
-      let target = document.getElementById(
-        `type${typenbplus}`
-      ) as HTMLDivElement;
+    let target = document.getElementById(`type${typenbplus}`) as HTMLDivElement;
+    if (target) {
       if (target.innerHTML == "") {
-        target.innerHTML = `<select id="col${
+        target.style.backgroundColor = "red";
+        target.innerHTML = `<select style="background-color: red" id="col${
           i + 1
-        }12"><option value=""></option><option value="t">Trex</option><option value="r">R<span>&hearts;</span></option><option value="l">Ltouch</option><option value="b">Banet</option><option value="d">&diams;</option></select>`;
+        }12"><option value="t">Trex</option><option value="r">R<span>&hearts;</span></option><option value="l">Ltouch</option><option value="b">Banet</option><option value="d">&diams;</option></select>`;
         localStorage.setItem(
           `type${typenbplus}`,
           JSON.stringify(target.innerHTML)
