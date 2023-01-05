@@ -45,13 +45,15 @@ gameDOM.addEventListener("click", function (event: any) {
   ) as HTMLSelectElement;
   let x = document.getElementById(`${targetID}`) as HTMLDataElement;
   if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-    reference.onchange = cond3(targetID);
-    x.value
-      ? localStorage.setItem(`${targetID}`, JSON.stringify(x.value))
-      : null;
+    x.value && x.value != "" ? cond3(targetID) : null;
+    localStorage.setItem(`${reference.id}`, JSON.stringify(reference.value));
+    let parent = reference.parentElement as HTMLDivElement;
+    let parentId = parent?.id;
+    console.log(parent);
+    localStorage.setItem(`${parentId}`, JSON.stringify(parent.innerHTML));
   }
   if (targetID.length == 6 && Number(targetID[targetID.length - 1]) > 2) {
-    if (document.getElementById(`${rLC(targetID) + 2}`)) {
+    if (reference) {
       let v1 = document.getElementById(
         `${rLC(targetID) + 3}`
       ) as HTMLDivElement;
@@ -68,6 +70,10 @@ gameDOM.addEventListener("click", function (event: any) {
       cond2(targetID);
       refreshresult();
       localStorage.setItem(`${targetID}`, JSON.stringify(x.textContent));
+      localStorage.setItem(`${reference.id}`, JSON.stringify(reference.value));
+      let parent = reference.parentElement as HTMLDivElement;
+      let parentId = parent?.id;
+      localStorage.setItem(`${parentId}`, JSON.stringify(parent.innerHTML));
     }
   }
 });
@@ -363,17 +369,8 @@ let refreshresult = function () {
 };
 
 //JSON
-//displaying the available select elements
-function json1() {
-  for (let j = 1; j < 21; j++) {
-    let typenb = `type${j}`;
-    let target = document.getElementById(`${typenb}`) as HTMLDivElement;
-    let storage = localStorage.getItem(`${typenb}`);
-    storage ? (target.innerHTML = JSON.parse(storage)) : null;
-  }
-}
 //displaying the available calculation
-function json2() {
+function json1() {
   for (let i = 3; i < 7; i++) {
     for (let k = 1; k < 6; k++) {
       for (let j = 2; j < 6; j++) {
@@ -383,6 +380,15 @@ function json2() {
         storage ? (target.innerHTML = JSON.parse(storage)) : null;
       }
     }
+  }
+}
+//displaying the available select elements
+function json2() {
+  for (let j = 1; j < 21; j++) {
+    let typenb = `type${j}`;
+    let target = document.getElementById(`${typenb}`) as HTMLDivElement;
+    let storage = localStorage.getItem(`${typenb}`);
+    storage ? (target.innerHTML = JSON.parse(storage)) : null;
   }
 }
 //displaying the available selected types

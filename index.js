@@ -39,13 +39,15 @@ gameDOM.addEventListener("click", function (event) {
     var reference = document.getElementById("".concat(rLC(targetID) + "2"));
     var x = document.getElementById("".concat(targetID));
     if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-        reference.onchange = cond3(targetID);
-        x.value
-            ? localStorage.setItem("".concat(targetID), JSON.stringify(x.value))
-            : null;
+        x.value && x.value != "" ? cond3(targetID) : null;
+        localStorage.setItem("".concat(reference.id), JSON.stringify(reference.value));
+        var parent_1 = reference.parentElement;
+        var parentId = parent_1 === null || parent_1 === void 0 ? void 0 : parent_1.id;
+        console.log(parent_1);
+        localStorage.setItem("".concat(parentId), JSON.stringify(parent_1.innerHTML));
     }
     if (targetID.length == 6 && Number(targetID[targetID.length - 1]) > 2) {
-        if (document.getElementById("".concat(rLC(targetID) + 2))) {
+        if (reference) {
             var v1 = document.getElementById("".concat(rLC(targetID) + 3));
             var v2 = document.getElementById("".concat(rLC(targetID) + 4));
             var v3 = document.getElementById("".concat(rLC(targetID) + 5));
@@ -54,6 +56,10 @@ gameDOM.addEventListener("click", function (event) {
             cond2(targetID);
             refreshresult();
             localStorage.setItem("".concat(targetID), JSON.stringify(x.textContent));
+            localStorage.setItem("".concat(reference.id), JSON.stringify(reference.value));
+            var parent_2 = reference.parentElement;
+            var parentId = parent_2 === null || parent_2 === void 0 ? void 0 : parent_2.id;
+            localStorage.setItem("".concat(parentId), JSON.stringify(parent_2.innerHTML));
         }
     }
 });
@@ -163,7 +169,7 @@ function cond2(targetID) {
     var v3 = document.getElementById("".concat(rLC(targetID) + 5));
     var v4 = document.getElementById("".concat(rLC(targetID) + 6));
     if (reference) {
-        var parent_1 = reference.parentNode;
+        var parent_3 = reference.parentNode;
         var type = reference.value;
         var totalrowresult = Number(v1.textContent) +
             Number(v2.textContent) +
@@ -171,18 +177,18 @@ function cond2(targetID) {
             Number(v4.textContent);
         var op0 = function () {
             reference.style.backgroundColor = "lightblue";
-            parent_1.style.backgroundColor = "lightblue";
+            parent_3.style.backgroundColor = "lightblue";
         };
         var op1 = function () {
             reference.style.backgroundColor = "lightblue";
-            parent_1.style.backgroundColor = "lightblue";
+            parent_3.style.backgroundColor = "lightblue";
             reference.setAttribute("disabled", "");
             reference.style.fontWeight = "bolder";
             addSelect(reference);
         };
         var op2 = function () {
             reference.style.backgroundColor = "red";
-            parent_1.style.backgroundColor = "red";
+            parent_3.style.backgroundColor = "red";
         };
         if (type == "l") {
             totalrowresult == -195 ? op1() : op2();
@@ -212,7 +218,7 @@ function cond3(targetID) {
     var v3 = document.getElementById("".concat(rLC(targetID) + 5));
     var v4 = document.getElementById("".concat(rLC(targetID) + 6));
     if (reference) {
-        var parent_2 = reference.parentNode;
+        var parent_4 = reference.parentNode;
         var type = reference.value;
         var totalrowresult = Number(v1.textContent) +
             Number(v2.textContent) +
@@ -220,17 +226,17 @@ function cond3(targetID) {
             Number(v4.textContent);
         var op0 = function () {
             reference.style.backgroundColor = "lightblue";
-            parent_2.style.backgroundColor = "lightblue";
+            parent_4.style.backgroundColor = "lightblue";
         };
         var op1 = function () {
             reference.style.backgroundColor = "lightblue";
-            parent_2.style.backgroundColor = "lightblue";
+            parent_4.style.backgroundColor = "lightblue";
             reference.setAttribute("disabled", "");
             reference.style.fontWeight = "bolder";
         };
         var op2 = function () {
             reference.style.backgroundColor = "red";
-            parent_2.style.backgroundColor = "red";
+            parent_4.style.backgroundColor = "red";
         };
         if (type == "l") {
             totalrowresult == -195 ? op1() : op2();
@@ -330,17 +336,8 @@ var refreshresult = function () {
     }
 };
 //JSON
-//displaying the available select elements
-function json1() {
-    for (var j = 1; j < 21; j++) {
-        var typenb = "type".concat(j);
-        var target = document.getElementById("".concat(typenb));
-        var storage = localStorage.getItem("".concat(typenb));
-        storage ? (target.innerHTML = JSON.parse(storage)) : null;
-    }
-}
 //displaying the available calculation
-function json2() {
+function json1() {
     for (var i = 3; i < 7; i++) {
         for (var k = 1; k < 6; k++) {
             for (var j = 2; j < 6; j++) {
@@ -350,6 +347,15 @@ function json2() {
                 storage ? (target.innerHTML = JSON.parse(storage)) : null;
             }
         }
+    }
+}
+//displaying the available select elements
+function json2() {
+    for (var j = 1; j < 21; j++) {
+        var typenb = "type".concat(j);
+        var target = document.getElementById("".concat(typenb));
+        var storage = localStorage.getItem("".concat(typenb));
+        storage ? (target.innerHTML = JSON.parse(storage)) : null;
     }
 }
 //displaying the available selected types
