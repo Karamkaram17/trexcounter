@@ -18,6 +18,11 @@ let player4 = document.getElementById("player4") as HTMLInputElement;
 //resetbtn
 let resetBtn = document.getElementById("refreshssbutton") as HTMLButtonElement;
 
+json1();
+json2();
+json3();
+json4();
+
 //manual refresh session storage and refresh page
 resetBtn
   ? (resetBtn.onclick = () => {
@@ -31,10 +36,6 @@ resetBtn
 
 //automatic refresh result
 window.addEventListener("load", () => {
-  json1();
-  json2();
-  json3();
-  json4();
   refreshresult();
 });
 
@@ -46,7 +47,7 @@ gameDOM.addEventListener("click", function (event: any) {
   ) as HTMLSelectElement;
   let x = document.getElementById(`${targetID}`) as HTMLDataElement;
   if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-    // reference.onchange = cond2(targetID);
+    reference.onchange = cond2(targetID);
     x.value
       ? localStorage.setItem(`${targetID}`, JSON.stringify(x.value))
       : null;
@@ -327,21 +328,8 @@ function json1() {
     storage ? (target.innerHTML = JSON.parse(storage)) : null;
   }
 }
-//displaying the available calculation
-function json2() {
-  for (let i = 3; i < 7; i++) {
-    for (let k = 1; k < 6; k++) {
-      for (let j = 2; j < 6; j++) {
-        let name = `col${j}${k}${i}`;
-        let target = document.getElementById(`${name}`) as HTMLDivElement;
-        let storage = localStorage.getItem(`${name}`);
-        storage ? (target.innerHTML = JSON.parse(storage)) : null;
-      }
-    }
-  }
-}
 //displaying the available selected types
-function json3() {
+function json2() {
   for (let j = 2; j < 6; j++) {
     for (let k = 1; k < 6; k++) {
       let name = `col${j}${k}2`;
@@ -350,8 +338,21 @@ function json3() {
         let storage = localStorage.getItem(`${name}`);
         if (storage) {
           target.value = JSON.parse(storage);
-          // cond2(target.id);
+          cond2(target.id);
         }
+      }
+    }
+  }
+}
+//displaying the available calculation
+function json3() {
+  for (let i = 3; i < 7; i++) {
+    for (let k = 1; k < 6; k++) {
+      for (let j = 2; j < 6; j++) {
+        let name = `col${j}${k}${i}`;
+        let target = document.getElementById(`${name}`) as HTMLDivElement;
+        let storage = localStorage.getItem(`${name}`);
+        storage ? (target.innerHTML = JSON.parse(storage)) : null;
       }
     }
   }

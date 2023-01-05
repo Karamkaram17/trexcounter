@@ -17,6 +17,10 @@ var player3 = document.getElementById("player3");
 var player4 = document.getElementById("player4");
 //resetbtn
 var resetBtn = document.getElementById("refreshssbutton");
+json1();
+json2();
+json3();
+json4();
 //manual refresh session storage and refresh page
 resetBtn
     ? (resetBtn.onclick = function () {
@@ -29,10 +33,6 @@ resetBtn
     : null;
 //automatic refresh result
 window.addEventListener("load", function () {
-    json1();
-    json2();
-    json3();
-    json4();
     refreshresult();
 });
 //page operator
@@ -41,7 +41,7 @@ gameDOM.addEventListener("click", function (event) {
     var reference = document.getElementById("".concat(rLC(targetID) + "2"));
     var x = document.getElementById("".concat(targetID));
     if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-        // reference.onchange = cond2(targetID);
+        reference.onchange = cond2(targetID);
         x.value
             ? localStorage.setItem("".concat(targetID), JSON.stringify(x.value))
             : null;
@@ -293,31 +293,31 @@ function json1() {
         storage ? (target.innerHTML = JSON.parse(storage)) : null;
     }
 }
-//displaying the available calculation
+//displaying the available selected types
 function json2() {
-    for (var i = 3; i < 7; i++) {
+    for (var j = 2; j < 6; j++) {
         for (var k = 1; k < 6; k++) {
-            for (var j = 2; j < 6; j++) {
-                var name_1 = "col".concat(j).concat(k).concat(i);
-                var target = document.getElementById("".concat(name_1));
+            var name_1 = "col".concat(j).concat(k, "2");
+            var target = document.getElementById("".concat(name_1));
+            if (target) {
                 var storage = localStorage.getItem("".concat(name_1));
-                storage ? (target.innerHTML = JSON.parse(storage)) : null;
+                if (storage) {
+                    target.value = JSON.parse(storage);
+                    cond2(target.id);
+                }
             }
         }
     }
 }
-//displaying the available selected types
+//displaying the available calculation
 function json3() {
-    for (var j = 2; j < 6; j++) {
+    for (var i = 3; i < 7; i++) {
         for (var k = 1; k < 6; k++) {
-            var name_2 = "col".concat(j).concat(k, "2");
-            var target = document.getElementById("".concat(name_2));
-            if (target) {
+            for (var j = 2; j < 6; j++) {
+                var name_2 = "col".concat(j).concat(k).concat(i);
+                var target = document.getElementById("".concat(name_2));
                 var storage = localStorage.getItem("".concat(name_2));
-                if (storage) {
-                    target.value = JSON.parse(storage);
-                    // cond2(target.id);
-                }
+                storage ? (target.innerHTML = JSON.parse(storage)) : null;
             }
         }
     }
