@@ -22,15 +22,13 @@ json2();
 json3();
 json4();
 //manual refresh session storage and refresh page
-resetBtn
-    ? (resetBtn.onclick = function () {
-        var res = window.confirm("are you sure you want to reset ?");
-        if (res == true) {
-            localStorage.clear();
-            location.reload();
-        }
-    })
-    : null;
+resetBtn.onclick = function () {
+    var res = window.confirm("are you sure you want to reset ?");
+    if (res == true) {
+        localStorage.clear();
+        location.reload();
+    }
+};
 //automatic refresh result
 window.addEventListener("load", function () {
     refreshresult();
@@ -41,7 +39,7 @@ gameDOM.addEventListener("click", function (event) {
     var reference = document.getElementById("".concat(rLC(targetID) + "2"));
     var x = document.getElementById("".concat(targetID));
     if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-        reference.onchange = cond2(targetID);
+        reference.onchange = cond3(targetID);
         x.value
             ? localStorage.setItem("".concat(targetID), JSON.stringify(x.value))
             : null;
@@ -207,6 +205,54 @@ function cond2(targetID) {
     }
     return null;
 }
+function cond3(targetID) {
+    var reference = document.getElementById("".concat(rLC(targetID) + 2));
+    var v1 = document.getElementById("".concat(rLC(targetID) + 3));
+    var v2 = document.getElementById("".concat(rLC(targetID) + 4));
+    var v3 = document.getElementById("".concat(rLC(targetID) + 5));
+    var v4 = document.getElementById("".concat(rLC(targetID) + 6));
+    if (reference) {
+        var parent_2 = reference.parentNode;
+        var type = reference.value;
+        var totalrowresult = Number(v1.textContent) +
+            Number(v2.textContent) +
+            Number(v3.textContent) +
+            Number(v4.textContent);
+        var op0 = function () {
+            reference.style.backgroundColor = "lightblue";
+            parent_2.style.backgroundColor = "lightblue";
+        };
+        var op1 = function () {
+            reference.style.backgroundColor = "lightblue";
+            parent_2.style.backgroundColor = "lightblue";
+            reference.setAttribute("disabled", "");
+            reference.style.fontWeight = "bolder";
+        };
+        var op2 = function () {
+            reference.style.backgroundColor = "red";
+            parent_2.style.backgroundColor = "red";
+        };
+        if (type == "l") {
+            totalrowresult == -195 ? op1() : op2();
+        }
+        else if (type == "t") {
+            totalrowresult == 500 ? op1() : op2();
+        }
+        else if (type == "b") {
+            totalrowresult == -100 ? op1() : op2();
+        }
+        else if (type == "d") {
+            totalrowresult == -130 ? op1() : op2();
+        }
+        else if (type == "r") {
+            totalrowresult == -75 ? op1() : op2();
+        }
+        else {
+            op0();
+        }
+    }
+    return null;
+}
 //function operate with select element
 function addSelect(reference) {
     var referenceId = reference.id;
@@ -293,31 +339,31 @@ function json1() {
         storage ? (target.innerHTML = JSON.parse(storage)) : null;
     }
 }
-//displaying the available selected types
+//displaying the available calculation
 function json2() {
-    for (var j = 2; j < 6; j++) {
+    for (var i = 3; i < 7; i++) {
         for (var k = 1; k < 6; k++) {
-            var name_1 = "col".concat(j).concat(k, "2");
-            var target = document.getElementById("".concat(name_1));
-            if (target) {
+            for (var j = 2; j < 6; j++) {
+                var name_1 = "col".concat(j).concat(k).concat(i);
+                var target = document.getElementById("".concat(name_1));
                 var storage = localStorage.getItem("".concat(name_1));
-                if (storage) {
-                    target.value = JSON.parse(storage);
-                    cond2(target.id);
-                }
+                storage ? (target.innerHTML = JSON.parse(storage)) : null;
             }
         }
     }
 }
-//displaying the available calculation
+//displaying the available selected types
 function json3() {
-    for (var i = 3; i < 7; i++) {
+    for (var j = 2; j < 6; j++) {
         for (var k = 1; k < 6; k++) {
-            for (var j = 2; j < 6; j++) {
-                var name_2 = "col".concat(j).concat(k).concat(i);
-                var target = document.getElementById("".concat(name_2));
+            var name_2 = "col".concat(j).concat(k, "2");
+            var target = document.getElementById("".concat(name_2));
+            if (target) {
                 var storage = localStorage.getItem("".concat(name_2));
-                storage ? (target.innerHTML = JSON.parse(storage)) : null;
+                if (storage) {
+                    target.value = JSON.parse(storage);
+                    cond3(target.id);
+                }
             }
         }
     }

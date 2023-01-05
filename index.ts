@@ -24,15 +24,13 @@ json3();
 json4();
 
 //manual refresh session storage and refresh page
-resetBtn
-  ? (resetBtn.onclick = () => {
-      let res = window.confirm(`are you sure you want to reset ?`);
-      if (res == true) {
-        localStorage.clear();
-        location.reload();
-      }
-    })
-  : null;
+resetBtn.onclick = () => {
+  let res = window.confirm(`are you sure you want to reset ?`);
+  if (res == true) {
+    localStorage.clear();
+    location.reload();
+  }
+};
 
 //automatic refresh result
 window.addEventListener("load", () => {
@@ -47,7 +45,7 @@ gameDOM.addEventListener("click", function (event: any) {
   ) as HTMLSelectElement;
   let x = document.getElementById(`${targetID}`) as HTMLDataElement;
   if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-    reference.onchange = cond2(targetID);
+    reference.onchange = cond3(targetID);
     x.value
       ? localStorage.setItem(`${targetID}`, JSON.stringify(x.value))
       : null;
@@ -184,7 +182,7 @@ let cond = function (
 function cond2(targetID: string): null {
   let reference = document.getElementById(
     `${rLC(targetID) + 2}`
-  ) as HTMLDataElement;
+  ) as HTMLSelectElement;
   let v1 = document.getElementById(`${rLC(targetID) + 3}`) as HTMLDivElement;
   let v2 = document.getElementById(`${rLC(targetID) + 4}`) as HTMLDivElement;
   let v3 = document.getElementById(`${rLC(targetID) + 5}`) as HTMLDivElement;
@@ -207,6 +205,52 @@ function cond2(targetID: string): null {
       reference.setAttribute("disabled", "");
       reference.style.fontWeight = "bolder";
       addSelect(reference);
+    };
+    let op2 = () => {
+      reference.style.backgroundColor = "red";
+      parent.style.backgroundColor = "red";
+    };
+    if (type == "l") {
+      totalrowresult == -195 ? op1() : op2();
+    } else if (type == "t") {
+      totalrowresult == 500 ? op1() : op2();
+    } else if (type == "b") {
+      totalrowresult == -100 ? op1() : op2();
+    } else if (type == "d") {
+      totalrowresult == -130 ? op1() : op2();
+    } else if (type == "r") {
+      totalrowresult == -75 ? op1() : op2();
+    } else {
+      op0();
+    }
+  }
+  return null;
+}
+function cond3(targetID: string): null {
+  let reference = document.getElementById(
+    `${rLC(targetID) + 2}`
+  ) as HTMLSelectElement;
+  let v1 = document.getElementById(`${rLC(targetID) + 3}`) as HTMLDivElement;
+  let v2 = document.getElementById(`${rLC(targetID) + 4}`) as HTMLDivElement;
+  let v3 = document.getElementById(`${rLC(targetID) + 5}`) as HTMLDivElement;
+  let v4 = document.getElementById(`${rLC(targetID) + 6}`) as HTMLDivElement;
+  if (reference) {
+    let parent = reference.parentNode as HTMLDivElement;
+    let type: string = reference.value;
+    let totalrowresult =
+      Number(v1.textContent) +
+      Number(v2.textContent) +
+      Number(v3.textContent) +
+      Number(v4.textContent);
+    let op0 = () => {
+      reference.style.backgroundColor = "lightblue";
+      parent.style.backgroundColor = "lightblue";
+    };
+    let op1 = () => {
+      reference.style.backgroundColor = "lightblue";
+      parent.style.backgroundColor = "lightblue";
+      reference.setAttribute("disabled", "");
+      reference.style.fontWeight = "bolder";
     };
     let op2 = () => {
       reference.style.backgroundColor = "red";
@@ -328,8 +372,21 @@ function json1() {
     storage ? (target.innerHTML = JSON.parse(storage)) : null;
   }
 }
-//displaying the available selected types
+//displaying the available calculation
 function json2() {
+  for (let i = 3; i < 7; i++) {
+    for (let k = 1; k < 6; k++) {
+      for (let j = 2; j < 6; j++) {
+        let name = `col${j}${k}${i}`;
+        let target = document.getElementById(`${name}`) as HTMLDivElement;
+        let storage = localStorage.getItem(`${name}`);
+        storage ? (target.innerHTML = JSON.parse(storage)) : null;
+      }
+    }
+  }
+}
+//displaying the available selected types
+function json3() {
   for (let j = 2; j < 6; j++) {
     for (let k = 1; k < 6; k++) {
       let name = `col${j}${k}2`;
@@ -338,21 +395,8 @@ function json2() {
         let storage = localStorage.getItem(`${name}`);
         if (storage) {
           target.value = JSON.parse(storage);
-          cond2(target.id);
+          cond3(target.id);
         }
-      }
-    }
-  }
-}
-//displaying the available calculation
-function json3() {
-  for (let i = 3; i < 7; i++) {
-    for (let k = 1; k < 6; k++) {
-      for (let j = 2; j < 6; j++) {
-        let name = `col${j}${k}${i}`;
-        let target = document.getElementById(`${name}`) as HTMLDivElement;
-        let storage = localStorage.getItem(`${name}`);
-        storage ? (target.innerHTML = JSON.parse(storage)) : null;
       }
     }
   }
