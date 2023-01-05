@@ -113,7 +113,7 @@ select {
   margin: 10px auto;
   cursor: pointer;
 }
-#refreshssbutton {
+#resetBtn {
   position: absolute;
   left: 0;
   bottom: 0;

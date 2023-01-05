@@ -1,26 +1,11 @@
 var gameDOM = document.getElementById("gamediv");
 var submitBtn = document.getElementById("submitbutton");
-//player name row variables
-var a1 = document.getElementById("col13");
-var a2 = document.getElementById("col14");
-var a3 = document.getElementById("col15");
-var a4 = document.getElementById("col16");
-//player name column variables
-var b1 = document.getElementById("col211");
-var b2 = document.getElementById("col311");
-var b3 = document.getElementById("col411");
-var b4 = document.getElementById("col511");
-//player names input
-var player1 = document.getElementById("player1");
-var player2 = document.getElementById("player2");
-var player3 = document.getElementById("player3");
-var player4 = document.getElementById("player4");
-//resetbtn
-var resetBtn = document.getElementById("refreshssbutton");
-json1();
-json2();
-json3();
-json4();
+var resetBtn = document.getElementById("resetBtn");
+//loading available data
+json1(); //select divs
+json2(); //select types
+json3(); //calculations
+json4(); //player names
 //manual refresh session storage and refresh page
 resetBtn.onclick = function () {
     var res = window.confirm("are you sure you want to reset ?");
@@ -38,41 +23,37 @@ gameDOM.addEventListener("click", function (event) {
     var targetID = event.target.id;
     var reference = document.getElementById("".concat(rLC(targetID) + "2"));
     var x = document.getElementById("".concat(targetID));
+    var parent = reference.parentElement;
+    var parentId = parent === null || parent === void 0 ? void 0 : parent.id;
     if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-        x.value && x.value != "" ? cond3(targetID) : null;
+        x.value ? cond2(targetID) : null;
         localStorage.setItem("".concat(reference.id), JSON.stringify(reference.value));
-        var parent_1 = reference.parentElement;
-        var parentId = parent_1 === null || parent_1 === void 0 ? void 0 : parent_1.id;
-        console.log(parent_1);
-        localStorage.setItem("".concat(parentId), JSON.stringify(parent_1.innerHTML));
+        localStorage.setItem("".concat(parentId), JSON.stringify(parent.innerHTML));
     }
     if (targetID.length == 6 && Number(targetID[targetID.length - 1]) > 2) {
         if (reference) {
-            var v1 = document.getElementById("".concat(rLC(targetID) + 3));
-            var v2 = document.getElementById("".concat(rLC(targetID) + 4));
-            var v3 = document.getElementById("".concat(rLC(targetID) + 5));
-            var v4 = document.getElementById("".concat(rLC(targetID) + 6));
+            var v1 = document.getElementById("".concat(rLC(targetID) + "3"));
+            var v2 = document.getElementById("".concat(rLC(targetID) + "4"));
+            var v3 = document.getElementById("".concat(rLC(targetID) + "5"));
+            var v4 = document.getElementById("".concat(rLC(targetID) + "6"));
             cond(targetID, reference, v1, v2, v3, v4, x);
             cond2(targetID);
             refreshresult();
             localStorage.setItem("".concat(targetID), JSON.stringify(x.textContent));
             localStorage.setItem("".concat(reference.id), JSON.stringify(reference.value));
-            var parent_2 = reference.parentElement;
-            var parentId = parent_2 === null || parent_2 === void 0 ? void 0 : parent_2.id;
-            localStorage.setItem("".concat(parentId), JSON.stringify(parent_2.innerHTML));
+            localStorage.setItem("".concat(parentId), JSON.stringify(parent.innerHTML));
         }
     }
 });
 //submit btn operator
 submitBtn.addEventListener("click", function () {
-    a1.innerHTML = b1.innerHTML = player1.value;
-    localStorage.setItem("player1", JSON.stringify(player1.value));
-    a2.innerHTML = b2.innerHTML = player2.value;
-    localStorage.setItem("player2", JSON.stringify(player2.value));
-    a3.innerHTML = b3.innerHTML = player3.value;
-    localStorage.setItem("player3", JSON.stringify(player3.value));
-    a4.innerHTML = b4.innerHTML = player4.value;
-    localStorage.setItem("player4", JSON.stringify(player4.value));
+    for (var j = 1; j < 5; j++) {
+        var playertarget = document.getElementById("player".concat(j));
+        var name1 = document.getElementById("col1".concat(j + 2));
+        var name2 = document.getElementById("col".concat(j + 1, "11"));
+        name1.innerHTML = name2.innerHTML = playertarget.value;
+        localStorage.setItem("player".concat(j), JSON.stringify(playertarget.value));
+    }
 });
 //functions for editing strings
 function rLC(str) {
@@ -84,7 +65,7 @@ function rL2C(str) {
 function rL3C(str) {
     return str.slice(0, -3);
 }
-//function to determine type and giving according to type available choises for user to choose from
+//function to determine type and giving according to the chosen type the available choises for user to choose from
 var cond = function (targetID, reference, v1, v2, v3, v4, x) {
     var type = reference.value;
     var msg = 0;
@@ -169,26 +150,22 @@ function cond2(targetID) {
     var v3 = document.getElementById("".concat(rLC(targetID) + 5));
     var v4 = document.getElementById("".concat(rLC(targetID) + 6));
     if (reference) {
-        var parent_3 = reference.parentNode;
+        var parent_1 = reference.parentNode;
         var type = reference.value;
         var totalrowresult = Number(v1.textContent) +
             Number(v2.textContent) +
             Number(v3.textContent) +
             Number(v4.textContent);
-        var op0 = function () {
-            reference.style.backgroundColor = "lightblue";
-            parent_3.style.backgroundColor = "lightblue";
-        };
         var op1 = function () {
             reference.style.backgroundColor = "lightblue";
-            parent_3.style.backgroundColor = "lightblue";
+            parent_1.style.backgroundColor = "lightblue";
             reference.setAttribute("disabled", "");
             reference.style.fontWeight = "bolder";
             addSelect(reference);
         };
         var op2 = function () {
             reference.style.backgroundColor = "red";
-            parent_3.style.backgroundColor = "red";
+            parent_1.style.backgroundColor = "red";
         };
         if (type == "l") {
             totalrowresult == -195 ? op1() : op2();
@@ -206,55 +183,7 @@ function cond2(targetID) {
             totalrowresult == -75 ? op1() : op2();
         }
         else {
-            op0();
-        }
-    }
-    return null;
-}
-function cond3(targetID) {
-    var reference = document.getElementById("".concat(rLC(targetID) + 2));
-    var v1 = document.getElementById("".concat(rLC(targetID) + 3));
-    var v2 = document.getElementById("".concat(rLC(targetID) + 4));
-    var v3 = document.getElementById("".concat(rLC(targetID) + 5));
-    var v4 = document.getElementById("".concat(rLC(targetID) + 6));
-    if (reference) {
-        var parent_4 = reference.parentNode;
-        var type = reference.value;
-        var totalrowresult = Number(v1.textContent) +
-            Number(v2.textContent) +
-            Number(v3.textContent) +
-            Number(v4.textContent);
-        var op0 = function () {
-            reference.style.backgroundColor = "lightblue";
-            parent_4.style.backgroundColor = "lightblue";
-        };
-        var op1 = function () {
-            reference.style.backgroundColor = "lightblue";
-            parent_4.style.backgroundColor = "lightblue";
-            reference.setAttribute("disabled", "");
-            reference.style.fontWeight = "bolder";
-        };
-        var op2 = function () {
-            reference.style.backgroundColor = "red";
-            parent_4.style.backgroundColor = "red";
-        };
-        if (type == "l") {
-            totalrowresult == -195 ? op1() : op2();
-        }
-        else if (type == "t") {
-            totalrowresult == 500 ? op1() : op2();
-        }
-        else if (type == "b") {
-            totalrowresult == -100 ? op1() : op2();
-        }
-        else if (type == "d") {
-            totalrowresult == -130 ? op1() : op2();
-        }
-        else if (type == "r") {
-            totalrowresult == -75 ? op1() : op2();
-        }
-        else {
-            op0();
+            op2();
         }
     }
     return null;
@@ -291,22 +220,19 @@ function newSelect(referenceId, i, p) {
                 target ? types.splice(types.indexOf(target.value), 1) : null;
             }
             types.forEach(function (elm) {
-                elm == "" ? (select.innerHTML += "<option value=\"\"></option>") : null;
-                elm == "t"
-                    ? (select.innerHTML += "<option value=\"t\">Trex</option>")
-                    : null;
-                elm == "r"
-                    ? (select.innerHTML += "<option value=\"r\">R<span>&hearts;</span></option>")
-                    : null;
-                elm == "l"
-                    ? (select.innerHTML += "<option value=\"l\">Ltouch</option>")
-                    : null;
-                elm == "b"
-                    ? (select.innerHTML += "<option value=\"b\">Banet</option>")
-                    : null;
-                elm == "d"
-                    ? (select.innerHTML += "<option value=\"d\">&diams;</option>")
-                    : null;
+                elm == ""
+                    ? (select.innerHTML += "<option value=\"\"></option>")
+                    : elm == "t"
+                        ? (select.innerHTML += "<option value=\"t\">Trex</option>")
+                        : elm == "r"
+                            ? (select.innerHTML += "<option value=\"r\">R<span>&hearts;</span></option>")
+                            : elm == "l"
+                                ? (select.innerHTML += "<option value=\"l\">Ltouch</option>")
+                                : elm == "b"
+                                    ? (select.innerHTML += "<option value=\"b\">Banet</option>")
+                                    : elm == "d"
+                                        ? (select.innerHTML += "<option value=\"d\">&diams;</option>")
+                                        : null;
             });
             place2.appendChild(select);
             localStorage.setItem("type".concat(typenbplus), JSON.stringify(place2.innerHTML));
@@ -368,7 +294,7 @@ function json3() {
                 var storage = localStorage.getItem("".concat(name_2));
                 if (storage) {
                     target.value = JSON.parse(storage);
-                    cond3(target.id);
+                    cond2(target.id);
                 }
             }
         }
@@ -378,14 +304,14 @@ function json3() {
 function json4() {
     for (var j = 1; j < 5; j++) {
         var playertarget = document.getElementById("player".concat(j));
-        var namee = document.getElementById("col1".concat(j + 2));
-        var nameee = document.getElementById("col".concat(j + 1, "11"));
+        var name1 = document.getElementById("col1".concat(j + 2));
+        var name2 = document.getElementById("col".concat(j + 1, "11"));
         var storage = localStorage.getItem("player".concat(j));
-        storage
-            ? (playertarget.value =
-                namee.innerHTML =
-                    nameee.innerHTML =
-                        JSON.parse(storage))
-            : null;
+        if (storage) {
+            playertarget.value =
+                name1.innerHTML =
+                    name2.innerHTML =
+                        JSON.parse(storage);
+        }
     }
 }
