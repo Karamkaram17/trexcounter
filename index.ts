@@ -28,34 +28,51 @@ gameDOM.addEventListener("click", function (event: any) {
   let reference = document.getElementById(
     `${rLC(targetID) + "2"}`
   ) as HTMLSelectElement;
-  let x = document.getElementById(`${targetID}`) as HTMLDataElement;
-  let parent = reference.parentElement as HTMLDivElement;
-  let parentId = parent?.id;
-  if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-    x.value ? cond2(targetID) : null;
-    localStorage.setItem(`${reference.id}`, JSON.stringify(reference.value));
-    localStorage.setItem(`${parentId}`, JSON.stringify(parent.innerHTML));
-  }
-  if (targetID.length == 6 && Number(targetID[targetID.length - 1]) > 2) {
-    if (reference) {
-      let v1 = document.getElementById(
-        `${rLC(targetID) + "3"}`
-      ) as HTMLDivElement;
-      let v2 = document.getElementById(
-        `${rLC(targetID) + "4"}`
-      ) as HTMLDivElement;
-      let v3 = document.getElementById(
-        `${rLC(targetID) + "5"}`
-      ) as HTMLDivElement;
-      let v4 = document.getElementById(
-        `${rLC(targetID) + "6"}`
-      ) as HTMLDivElement;
+  if (reference) {
+    let x = document.getElementById(`${targetID}`) as HTMLDataElement;
+    let parent = reference.parentNode as HTMLDivElement;
+    let parentId = parent.id;
+    let v1 = document.getElementById(
+      `${rLC(targetID) + "3"}`
+    ) as HTMLDivElement;
+    let v2 = document.getElementById(
+      `${rLC(targetID) + "4"}`
+    ) as HTMLDivElement;
+    let v3 = document.getElementById(
+      `${rLC(targetID) + "5"}`
+    ) as HTMLDivElement;
+    let v4 = document.getElementById(
+      `${rLC(targetID) + "6"}`
+    ) as HTMLDivElement;
+    //if the selected target is in the column of types
+    if (
+      targetID.length == 6 &&
+      targetID[targetID.length - 1] === "2" &&
+      targetID[0] == "c" &&
+      parent
+    ) {
+      x.value ? cond2(targetID) : null;
+      localStorage.setItem(`${reference.id}`, JSON.stringify(reference.value));
+      if (parent.textContent !== "" || parent.textContent !== undefined) {
+        localStorage.setItem(`${parentId}`, JSON.stringify(parent.innerHTML));
+      }
+    }
+    //it the selected target is in the players columns
+    if (
+      targetID.length == 6 &&
+      Number(targetID[targetID.length - 1]) > 2 &&
+      targetID[0] == "c" &&
+      parent
+    ) {
       cond(targetID, reference, v1, v2, v3, v4, x);
       cond2(targetID);
       refreshresult();
+      reference.addEventListener("change", selectOnChange);
       localStorage.setItem(`${targetID}`, JSON.stringify(x.textContent));
       localStorage.setItem(`${reference.id}`, JSON.stringify(reference.value));
-      localStorage.setItem(`${parentId}`, JSON.stringify(parent.innerHTML));
+      if (parent.textContent !== "" || parent.textContent !== undefined) {
+        localStorage.setItem(`${parentId}`, JSON.stringify(parent.innerHTML));
+      }
     }
   }
 });
@@ -71,7 +88,19 @@ submitBtn.addEventListener("click", function () {
     localStorage.setItem(`player${j}`, JSON.stringify(playertarget.value));
   }
 });
-
+//selectfunction
+function selectOnChange(event: any) {
+  let targetID: string = event.target.id;
+  let v1 = document.getElementById(`${rLC(targetID) + "3"}`) as HTMLDivElement;
+  let v2 = document.getElementById(`${rLC(targetID) + "4"}`) as HTMLDivElement;
+  let v3 = document.getElementById(`${rLC(targetID) + "5"}`) as HTMLDivElement;
+  let v4 = document.getElementById(`${rLC(targetID) + "6"}`) as HTMLDivElement;
+  let vArray = [v1, v2, v3, v4];
+  vArray.forEach((elm) => {
+    elm.innerHTML = "";
+    localStorage.setItem(`${elm.id}`, JSON.stringify(elm.textContent));
+  });
+}
 //functions for editing strings
 function rLC(str: string): string {
   return str.slice(0, -1);
@@ -112,7 +141,7 @@ let cond = function (
     let vs = [v1, v2, v3, v4];
     vs.forEach((elm) => {
       if (elm.id != targetID) {
-        elm.innerText.length > 0
+        elm.innerText.length > 0 && Number(elm.innerText) !== 0
           ? msg2.splice(msg2.indexOf(5 - Number(elm.innerText) / 50), 1)
           : (msg2 = msg2);
       }
@@ -318,6 +347,7 @@ function json2() {
     let target = document.getElementById(`${typenb}`) as HTMLDivElement;
     let storage = localStorage.getItem(`${typenb}`);
     storage ? (target.innerHTML = JSON.parse(storage)) : null;
+    target.addEventListener("change", selectOnChange);
   }
 }
 //displaying the available selected types
@@ -335,6 +365,10 @@ function json3() {
       }
     }
   }
+  let selectDOM = document.querySelectorAll("select");
+  selectDOM.forEach((element) => {
+    cond2(element.id);
+  });
 }
 //displaying available names
 function json4() {

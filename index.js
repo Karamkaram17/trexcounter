@@ -22,26 +22,39 @@ window.addEventListener("load", function () {
 gameDOM.addEventListener("click", function (event) {
     var targetID = event.target.id;
     var reference = document.getElementById("".concat(rLC(targetID) + "2"));
-    var x = document.getElementById("".concat(targetID));
-    var parent = reference.parentElement;
-    var parentId = parent === null || parent === void 0 ? void 0 : parent.id;
-    if (targetID.length == 6 && targetID[targetID.length - 1] === "2") {
-        x.value ? cond2(targetID) : null;
-        localStorage.setItem("".concat(reference.id), JSON.stringify(reference.value));
-        localStorage.setItem("".concat(parentId), JSON.stringify(parent.innerHTML));
-    }
-    if (targetID.length == 6 && Number(targetID[targetID.length - 1]) > 2) {
-        if (reference) {
-            var v1 = document.getElementById("".concat(rLC(targetID) + "3"));
-            var v2 = document.getElementById("".concat(rLC(targetID) + "4"));
-            var v3 = document.getElementById("".concat(rLC(targetID) + "5"));
-            var v4 = document.getElementById("".concat(rLC(targetID) + "6"));
+    if (reference) {
+        var x = document.getElementById("".concat(targetID));
+        var parent_1 = reference.parentNode;
+        var parentId = parent_1.id;
+        var v1 = document.getElementById("".concat(rLC(targetID) + "3"));
+        var v2 = document.getElementById("".concat(rLC(targetID) + "4"));
+        var v3 = document.getElementById("".concat(rLC(targetID) + "5"));
+        var v4 = document.getElementById("".concat(rLC(targetID) + "6"));
+        //if the selected target is in the column of types
+        if (targetID.length == 6 &&
+            targetID[targetID.length - 1] === "2" &&
+            targetID[0] == "c" &&
+            parent_1) {
+            x.value ? cond2(targetID) : null;
+            localStorage.setItem("".concat(reference.id), JSON.stringify(reference.value));
+            if (parent_1.textContent !== "" || parent_1.textContent !== undefined) {
+                localStorage.setItem("".concat(parentId), JSON.stringify(parent_1.innerHTML));
+            }
+        }
+        //it the selected target is in the players columns
+        if (targetID.length == 6 &&
+            Number(targetID[targetID.length - 1]) > 2 &&
+            targetID[0] == "c" &&
+            parent_1) {
             cond(targetID, reference, v1, v2, v3, v4, x);
             cond2(targetID);
             refreshresult();
+            reference.addEventListener("change", selectOnChange);
             localStorage.setItem("".concat(targetID), JSON.stringify(x.textContent));
             localStorage.setItem("".concat(reference.id), JSON.stringify(reference.value));
-            localStorage.setItem("".concat(parentId), JSON.stringify(parent.innerHTML));
+            if (parent_1.textContent !== "" || parent_1.textContent !== undefined) {
+                localStorage.setItem("".concat(parentId), JSON.stringify(parent_1.innerHTML));
+            }
         }
     }
 });
@@ -55,6 +68,19 @@ submitBtn.addEventListener("click", function () {
         localStorage.setItem("player".concat(j), JSON.stringify(playertarget.value));
     }
 });
+//selectfunction
+function selectOnChange(event) {
+    var targetID = event.target.id;
+    var v1 = document.getElementById("".concat(rLC(targetID) + "3"));
+    var v2 = document.getElementById("".concat(rLC(targetID) + "4"));
+    var v3 = document.getElementById("".concat(rLC(targetID) + "5"));
+    var v4 = document.getElementById("".concat(rLC(targetID) + "6"));
+    var vArray = [v1, v2, v3, v4];
+    vArray.forEach(function (elm) {
+        elm.innerHTML = "";
+        localStorage.setItem("".concat(elm.id), JSON.stringify(elm.textContent));
+    });
+}
 //functions for editing strings
 function rLC(str) {
     return str.slice(0, -1);
@@ -86,7 +112,7 @@ var cond = function (targetID, reference, v1, v2, v3, v4, x) {
         var vs = [v1, v2, v3, v4];
         vs.forEach(function (elm) {
             if (elm.id != targetID) {
-                elm.innerText.length > 0
+                elm.innerText.length > 0 && Number(elm.innerText) !== 0
                     ? msg2.splice(msg2.indexOf(5 - Number(elm.innerText) / 50), 1)
                     : (msg2 = msg2);
             }
@@ -150,7 +176,7 @@ function cond2(targetID) {
     var v3 = document.getElementById("".concat(rLC(targetID) + 5));
     var v4 = document.getElementById("".concat(rLC(targetID) + 6));
     if (reference) {
-        var parent_1 = reference.parentNode;
+        var parent_2 = reference.parentNode;
         var type = reference.value;
         var totalrowresult = Number(v1.textContent) +
             Number(v2.textContent) +
@@ -158,14 +184,14 @@ function cond2(targetID) {
             Number(v4.textContent);
         var op1 = function () {
             reference.style.backgroundColor = "lightblue";
-            parent_1.style.backgroundColor = "lightblue";
+            parent_2.style.backgroundColor = "lightblue";
             reference.setAttribute("disabled", "");
             reference.style.fontWeight = "bolder";
             addSelect(reference);
         };
         var op2 = function () {
             reference.style.backgroundColor = "red";
-            parent_1.style.backgroundColor = "red";
+            parent_2.style.backgroundColor = "red";
         };
         if (type == "l") {
             totalrowresult == -195 ? op1() : op2();
@@ -283,6 +309,7 @@ function json2() {
         var target = document.getElementById("".concat(typenb));
         var storage = localStorage.getItem("".concat(typenb));
         storage ? (target.innerHTML = JSON.parse(storage)) : null;
+        target.addEventListener("change", selectOnChange);
     }
 }
 //displaying the available selected types
@@ -300,6 +327,10 @@ function json3() {
             }
         }
     }
+    var selectDOM = document.querySelectorAll("select");
+    selectDOM.forEach(function (element) {
+        cond2(element.id);
+    });
 }
 //displaying available names
 function json4() {
